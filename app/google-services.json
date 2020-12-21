@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "671112223547",
+    "firebase_url": "https://mobile-mechanic-cd6f2-default-rtdb.firebaseio.com",
+    "project_id": "mobile-mechanic-cd6f2",
+    "storage_bucket": "mobile-mechanic-cd6f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671112223547:android:474b924d1f20bc76cef51e",
+        "android_client_info": {
+          "package_name": "com.example.mobilemechanic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671112223547-fcdknptg2gv690ererl8q0bickdmq7or.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mobilemechanic",
+            "certificate_hash": "1df1e06cab44c6804e1371c62476ce68e35464b1"
+          }
+        },
+        {
+          "client_id": "671112223547-3u0ect37b6m7m7s90mgke9lenqjv3tjk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcrKc19GIkgqMFmpfBwgNIFerdA-99bJA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671112223547-3u0ect37b6m7m7s90mgke9lenqjv3tjk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
