@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -60,6 +63,32 @@ public class Driver extends AppCompatActivity {
 
         defaultView = findViewById(R.id.defaultView);
 
+        searchText = findViewById(R.id.editTextSearch);
+
+        searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (!s.toString().isEmpty()) {
+
+//                    productSearch(s.toString());
+                    settAdapter(s.toString());
+                } else {
+                    adapter = new mechanicsAdapter(Driver.this, mechanicList);
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+        });
         circleP_bar = findViewById(R.id.progressBarCircle);
         //        Obtaining reference to the firebase database
         mDatabase = FirebaseDatabase.getInstance().getReference("Mechanics");
@@ -142,6 +171,67 @@ public class Driver extends AppCompatActivity {
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 
+    private void settAdapter(final String queryString) {
+
+
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                filteredProductsList.clear();
+                recyclerView.removeAllViews();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String uid = snapshot.getKey();
+                    String pName = snapshot.child("name").getValue(String.class);
+                    String pEmail = snapshot.child("email").getValue(String.class);
+                    String pLocation = snapshot.child("location").getValue(String.class);
+
+//                    Products filteredProduct = snapshot.getValue(Products.class);
+                    MechanicModel modelFiltered = snapshot.getValue(MechanicModel.class);
+
+                    if (pName.equals(null)) {
+                        Toast.makeText(Driver.this, "Name is null", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (pName.toLowerCase().contains(queryString.toLowerCase())) {
+//                            nameList.add(pName);
+                            filteredProductsList.add(modelFiltered);
+                        }
+
+                        if (pEmail.equals(null)) {
+                            Toast.makeText(Driver.this, "Mail is Null", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (pEmail.toLowerCase().contains(queryString.toLowerCase())) {
+                                filteredProductsList.add(modelFiltered);
+                            }
+
+                            if (pLocation.equals(null)) {
+                                Toast.makeText(Driver.this, "Location is null", Toast.LENGTH_SHORT).show();
+                            } else {
+                                if (pLocation.toLowerCase().contains(queryString.toLowerCase())) {
+                                    filteredProductsList.add(modelFiltered);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (!filteredProductsList.isEmpty()) {
+                    defaultView.setVisibility(View.INVISIBLE);
+                    adapter = new mechanicsAdapter(Driver.this, filteredProductsList);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    defaultView.setVisibility(View.VISIBLE);
+                    defaultView.setText("No Products based on Your Search Criteria... Try Again");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -149,7 +239,9 @@ public class Driver extends AppCompatActivity {
 
             case R.id.logOut:
 //                logging out implementation
-                Toast.makeText(this, "Log Out Implementation Coming Soon", Toast.LENGTH_SHORT).show();
+                Intent logIntent = new Intent(this, MainActivity.class);
+                startActivity(logIntent);
+//                Toast.makeText(this, "Log Out Implementation Coming Soon", Toast.LENGTH_SHORT).show();
 
                 return true;
             default:

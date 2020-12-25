@@ -28,10 +28,28 @@
         android:visibility="gone"
         android:text="No available Mechanics at The Moment" />
 
+    <EditText
+        android:id="@+id/editTextSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:padding="10dp"
+        android:ems="10"
+        android:hint="Search ..."
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@id/driverRecycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/ic_search_black_24dp"/>
     <androidx.recyclerview.widget.RecyclerView
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextSearch"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/driverRecycler"
         android:layout_width="match_parent"

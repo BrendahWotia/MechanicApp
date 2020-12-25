@@ -3,6 +3,7 @@ package com.example.mobilemechanic;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,8 +26,9 @@ public class Profile extends AppCompatActivity {
 
             case R.id.logOut:
 //                logging out implementation
-                Toast.makeText(this, "Log Out Implementation Coming Soon", Toast.LENGTH_SHORT).show();
-
+//                Toast.makeText(this, "Log Out Implementation Coming Soon", Toast.LENGTH_SHORT).show();
+                Intent logIntent = new Intent(this, MainActivity.class);
+                startActivity(logIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
