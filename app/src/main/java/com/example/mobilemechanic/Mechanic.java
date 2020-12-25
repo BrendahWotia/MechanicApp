@@ -74,7 +74,7 @@ public class Mechanic extends AppCompatActivity {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mProgress.setVisibility(View.VISIBLE);
+                mProgress.setVisibility(View.VISIBLE);
 //                uploadDetails();
                 receiveEntries();
             }
@@ -147,12 +147,13 @@ public class Mechanic extends AppCompatActivity {
                                 databaseReference.child(key).setValue(mechanic);
 
                                 Toast.makeText(Mechanic.this, "Success Key retention...", Toast.LENGTH_LONG).show();
+                                mProgress.setVisibility(View.INVISIBLE);
                                 backToProfile(nameMech, phoneMech,locationMech, emailMech, sImage);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-
+                                mProgress.setVisibility(View.INVISIBLE);
                                 Toast.makeText(Mechanic.this, "Database Fail...", Toast.LENGTH_SHORT).show();
                             }
                         });
