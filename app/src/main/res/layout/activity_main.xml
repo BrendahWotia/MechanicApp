@@ -18,24 +18,24 @@
 
     <Button
         android:id="@+id/driverBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Driver"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="10dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
         android:padding="8dp"/>
     <Button
         android:id="@+id/mechanicBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Mechanic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/driverBtn"
+        android:layout_margin="50dp"
         android:padding="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
