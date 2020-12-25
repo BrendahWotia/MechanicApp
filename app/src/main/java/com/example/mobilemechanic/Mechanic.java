@@ -147,7 +147,7 @@ public class Mechanic extends AppCompatActivity {
                                 databaseReference.child(key).setValue(mechanic);
 
                                 Toast.makeText(Mechanic.this, "Success Key retention...", Toast.LENGTH_LONG).show();
-                                backToProfile(key);
+                                backToProfile(nameMech, phoneMech,locationMech, emailMech, sImage);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -177,19 +177,19 @@ public class Mechanic extends AppCompatActivity {
         return extension;
     }
 
-    private void backToProfile(String key) {
-//        Intent backIntent = new Intent(this, Products_view.class);
-//        backIntent.putExtra("phone", product.getPhone());
-//        backIntent.putExtra("name", product.getName());
-//        backIntent.putExtra("location", product.getLocation());
-//        backIntent.putExtra("price", product.getPrice());
+    private void backToProfile(String nameMech, String phoneMech, String locationMech, String emailMech, String imageMech) {
+        Intent backIntent = new Intent(this, Profile.class);
+        backIntent.putExtra("phone", phoneMech);
+        backIntent.putExtra("name", nameMech);
+        backIntent.putExtra("location", locationMech);
+//        backIntent.putExtra("price", pro;
 //        backIntent.putExtra("capacity", product.getCapacity());
-//        backIntent.putExtra("mail", product.getEmail());
-//        backIntent.putExtra("image", product.getImage());
+        backIntent.putExtra("mail", emailMech);
+        backIntent.putExtra("image", imageMech);
 //        backIntent.putExtra("key", key);
 //
-//        startActivity(backIntent);
-        Toast.makeText(this, "Upload Done Go to Profile", Toast.LENGTH_SHORT).show();
+        startActivity(backIntent);
+//        Toast.makeText(this, "Upload Done Go to Profile", Toast.LENGTH_SHORT).show();
     }
 //    private void uploadDetails() {
 ////        receiveEntries();
