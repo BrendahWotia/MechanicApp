@@ -1,11 +1,14 @@
 package com.example.mobilemechanic;
 
+import com.google.firebase.database.Exclude;
+
 public class MechanicModel {
     private String name;
     private String phone;
     private String location;
     private String email;
     private String imageUrl;
+    private String id;
 
     public MechanicModel(String name, String phone, String location, String email, String imageUrl) {
         this.name = name;
@@ -15,6 +18,22 @@ public class MechanicModel {
         this.imageUrl = imageUrl;
     }
 
+
+    public MechanicModel() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    @Exclude
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    //    public MechanicModel(String nameMech, String phoneMech, String emailMech, String sImage) {
+//
+//    }
 
     public String getName() {
         return name;
