@@ -1,13 +1,16 @@
 package com.example.mobilemechanic;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,11 +26,15 @@ public class signIn extends AppCompatActivity {
     private static FirebaseAuth signInmAuth;
     private EditText signInMail, signInPassword ;
     private Button signInBtn;
+    private static String TAG = "SIGN IN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         signInmAuth = FirebaseAuth.getInstance();
 
@@ -107,4 +114,64 @@ public class signIn extends AppCompatActivity {
         Intent autoIntent = new Intent(this, MainActivity.class);
         startActivity(autoIntent);
     }
-}
+
+    public void tv_to_signUp(View view) {
+        Intent tv_signIntent = new Intent(signIn.this, signUp.class);
+        startActivity(tv_signIntent);
+    }
+
+    public void forgotPassword(View view) {
+
+            if (isNetworkConnected()) {
+//            if (isInternetAvailable()){
+
+                AlertDialog.Builder resetBuilder = new AlertDialog.Builder(this);
+                resetBuilder.setTitle("Email Reset");
+                resetBuilder.setMessage("Enter Email To Receive Password Reset Link");
+
+                final EditText resetInput = new EditText(this);
+                resetBuilder.setView(resetInput);
+                resetBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final String resetMail = resetInput.getText().toString().trim();
+
+                        if (resetMail.isEmpty()) {
+                            Toast.makeText(signIn.this, "The Email Address is Blank...", Toast.LENGTH_SHORT).show();
+                        }
+
+                        if (Patterns.EMAIL_ADDRESS.matcher(resetMail).matches()) {
+                            FirebaseAuth auth = FirebaseAuth.getInstance();
+
+                            auth.sendPasswordResetEmail(resetMail)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "Email sent.");
+
+                                                Toast.makeText(signIn.this, " Reset Email has been Sent to : " + resetMail, Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                        } else {
+                            Toast.makeText(signIn.this, "Invalid E-Mail Address...", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
+
+                resetBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(signIn.this, "Request Cancelled...", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                resetBuilder.show();
+            } else {
+                Toast.makeText(signIn.this, R.string.No_network, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+//}

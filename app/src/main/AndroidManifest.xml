@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="true"
@@ -13,24 +14,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".signIn"></activity>
-        <activity android:name=".signUp">
+        <activity android:name=".MechanicDetails"
+            android:parentActivityName=".Driver"></activity>
+        <activity android:name=".signIn"
+            android:label="Verification"
+            android:parentActivityName=".FirstScreen"/>
+        <activity android:name=".signUp"
+            android:label="Registration"
+            android:parentActivityName=".FirstScreen">
+
+        </activity>
+        <activity android:name=".FirstScreen"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FirstScreen" />
-        <activity android:name=".Profile" />
-        <activity android:name=".Driver" />
+        <activity android:name=".Profile"
+            android:parentActivityName=".Mechanic"/>
+        <activity android:name=".Driver"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".Mechanic" />
-        <activity android:name=".MainActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
     </application>
 

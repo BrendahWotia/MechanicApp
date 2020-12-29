@@ -59,7 +59,7 @@ public class Driver extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        setTitle("Mechanics List");
+        setTitle("Mechanic List");
 
         defaultView = findViewById(R.id.defaultView);
 
@@ -239,7 +239,8 @@ public class Driver extends AppCompatActivity {
 
             case R.id.logOut:
 //                logging out implementation
-                Intent logIntent = new Intent(this, MainActivity.class);
+                signOutmAuth.signOut();
+                Intent logIntent = new Intent(this, FirstScreen.class);
                 startActivity(logIntent);
 //                Toast.makeText(this, "Log Out Implementation Coming Soon", Toast.LENGTH_SHORT).show();
 

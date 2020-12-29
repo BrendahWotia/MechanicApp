@@ -41,7 +41,7 @@ public class mechanicsAdapter extends RecyclerView.Adapter<mechanicsAdapter.mech
 
     @Override
     public void onBindViewHolder(@NonNull mechanicsViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: allign to recycler...");
+        Log.d(TAG, "onBindViewHolder: align to recycler...");
         final MechanicModel currentMechanic = mechanicList.get(position);
         holder.recName.setText("Name : " + currentMechanic.getName());
         holder.recLocation.setText("Location : " + currentMechanic.getLocation());
@@ -55,27 +55,21 @@ public class mechanicsAdapter extends RecyclerView.Adapter<mechanicsAdapter.mech
                 .into(holder.recImage);
 
 
-//        if (Products_view.buttonString.equals("buyer")) {
+            holder.clickedLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent passIntent = new Intent(mcontext, MechanicDetails.class);
+                    passIntent.putExtra("name", currentMechanic.getName());
+                    passIntent.putExtra("location", currentMechanic.getLocation());
+                    passIntent.putExtra("mail", currentMechanic.getEmail());
+                    passIntent.putExtra("image", currentMechanic.getImageUrl());
+                    passIntent.putExtra("phone", currentMechanic.getPhone());
 
-//            holder.clickedLayout.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent passIntent = new Intent(mcontext, Product_Details.class);
-//                    passIntent.putExtra("name", currentProducts.getName());
-//                    passIntent.putExtra("location", currentProducts.getLocation());
-//                    passIntent.putExtra("price", currentProducts.getPrice());
-//                    passIntent.putExtra("capacity", currentProducts.getCapacity());
-//                    passIntent.putExtra("email", currentProducts.getEmail());
-//                    passIntent.putExtra("phone", currentProducts.getPhone());
-//                    passIntent.putExtra("image", currentProducts.getImage());
-//                    passIntent.putExtra("key", currentProducts.getID());
+                    mcontext.startActivity(passIntent);
+                    Log.d(TAG, "onClick: detail view...");
+                }
+            });
 
-//                    Toast.makeText(mcontext, "Key:" + currentProducts.getID(), Toast.LENGTH_LONG).show();
-//                    mcontext.startActivity(passIntent);
-//                    Log.d(TAG, "onClick: detail view...");
-//                }
-//            });
-//        }
         Log.d(TAG, "onBindViewHolder: done binding....");
     }
 
@@ -94,7 +88,7 @@ public class mechanicsAdapter extends RecyclerView.Adapter<mechanicsAdapter.mech
 
         ImageView recImage;
         TextView recName, recLocation, recPhone, recMail;
-//        LinearLayout clickedLayout;
+        LinearLayout clickedLayout;
 
         public mechanicsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -104,7 +98,7 @@ public class mechanicsAdapter extends RecyclerView.Adapter<mechanicsAdapter.mech
             recLocation = itemView.findViewById(R.id.recycleLocation);
             recPhone = itemView.findViewById(R.id.recyclePhone);
             recMail = itemView.findViewById(R.id.recycleEmail);
-//            clickedLayout = itemView.findViewById(R.id.rec);
+            clickedLayout = itemView.findViewById(R.id.rec);
         }
     }
 }

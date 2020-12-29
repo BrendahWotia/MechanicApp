@@ -12,12 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 public class Profile extends AppCompatActivity {
 
     ImageView profileImage;
     TextView tvName, tvMail, tvPhone, tvLocation ;
+    FirebaseAuth mechAuth;
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -27,7 +29,8 @@ public class Profile extends AppCompatActivity {
             case R.id.logOut:
 //                logging out implementation
 //                Toast.makeText(this, "Log Out Implementation Coming Soon", Toast.LENGTH_SHORT).show();
-                Intent logIntent = new Intent(this, MainActivity.class);
+                mechAuth.signOut();
+                Intent logIntent = new Intent(this, FirstScreen.class);
                 startActivity(logIntent);
                 return true;
             default:
@@ -75,10 +78,10 @@ public class Profile extends AppCompatActivity {
             pImage = getIntent().getStringExtra("image");
 
 
-            tvName.setText(pName);
-            tvMail.setText(pMail);
-            tvPhone.setText(pPhone);
-            tvLocation.setText(pLocation);
+            tvName.setText("Name :            " + pName);
+            tvMail.setText("E-Mail Address :         " + pMail);
+            tvPhone.setText("Phone Number :         " + pPhone);
+            tvLocation.setText("Location :          " + pLocation);
 
             Picasso.get().load(pImage).placeholder(R.drawable.ic_image_black_24dp).into(profileImage);
             Toast.makeText(this, "Saving Profile SuccessFull...", Toast.LENGTH_SHORT).show();

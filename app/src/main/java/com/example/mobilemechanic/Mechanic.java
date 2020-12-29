@@ -33,7 +33,7 @@ import com.squareup.picasso.Picasso;
 public class Mechanic extends AppCompatActivity {
     EditText name, phone, location, email;
     Uri image_uri;
-    Button uploadButton, imageBtn;
+    Button uploadButton ;
     ImageView mechImage;
     String nameMech, phoneMech, locationMech, emailMech;
     FirebaseDatabase database ;
@@ -65,7 +65,7 @@ public class Mechanic extends AppCompatActivity {
         email = findViewById(R.id.etEmail);
         uploadButton = findViewById(R.id.uploadDBtn);
         mechImage = findViewById(R.id.imageViewMechanic);
-        imageBtn = findViewById(R.id.imageDBtn);
+//        imageBtn = findViewById(R.id.imageDBtn);
         mProgress = findViewById(R.id.progressBar);
 
 
@@ -74,18 +74,18 @@ public class Mechanic extends AppCompatActivity {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgress.setVisibility(View.VISIBLE);
+//                mProgress.setVisibility(View.VISIBLE);
 //                uploadDetails();
                 receiveEntries();
             }
         });
 
-        imageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                choosingPhoto();
-            }
-        });
+//        imageBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                choosingPhoto();
+//            }
+//        });
     }
 
     private void uploadDetails() {
@@ -130,6 +130,7 @@ public class Mechanic extends AppCompatActivity {
                                 Toast.makeText(Mechanic.this, "Proceed...", Toast.LENGTH_LONG).show();
                                 String sImage = uri.toString();
 
+                                mProgress.setVisibility(View.VISIBLE);
                                 Handler handler = new Handler();
                                 handler.postDelayed(new Runnable() {
                                     @Override
@@ -149,6 +150,11 @@ public class Mechanic extends AppCompatActivity {
                                 Toast.makeText(Mechanic.this, "Success Key retention...", Toast.LENGTH_LONG).show();
                                 mProgress.setVisibility(View.INVISIBLE);
                                 backToProfile(nameMech, phoneMech,locationMech, emailMech, sImage);
+                                name.setText("");
+                                location.setText("");
+                                phone.setText("");
+                                email.setText("");
+                                Picasso.get().load("null").placeholder(R.drawable.ic_image_black_24dp).into(mechImage);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -188,6 +194,7 @@ public class Mechanic extends AppCompatActivity {
         backIntent.putExtra("mail", emailMech);
         backIntent.putExtra("image", imageMech);
 //        backIntent.putExtra("key", key);
+        Toast.makeText(this, "Successful Upload of Details..", Toast.LENGTH_SHORT).show();
 //
         startActivity(backIntent);
 //        Toast.makeText(this, "Upload Done Go to Profile", Toast.LENGTH_SHORT).show();
@@ -266,5 +273,8 @@ public class Mechanic extends AppCompatActivity {
         }
     }
 
+    public void selectPhoto(View view) {
+        choosingPhoto();
+    }
 }
 
