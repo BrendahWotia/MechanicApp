@@ -21,7 +21,7 @@ Button signIn, signOut;
             @Override
             public void onClick(View v) {
 
-                Intent signInIntent = new Intent(FirstScreen.this, com.example.mobilemechanic.signIn.class);
+                Intent signInIntent = new Intent(FirstScreen.this, signIn.class);
                 startActivity(signInIntent);
             }
         });
@@ -30,7 +30,7 @@ Button signIn, signOut;
             @Override
             public void onClick(View v) {
 
-                Intent signOutIntent = new Intent(FirstScreen.this, com.example.mobilemechanic.signUp.class);
+                Intent signOutIntent = new Intent(FirstScreen.this, signUp.class);
                 startActivity(signOutIntent);
             }
         });

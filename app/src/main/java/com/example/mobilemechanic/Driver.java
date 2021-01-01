@@ -239,7 +239,7 @@ public class Driver extends AppCompatActivity {
 
             case R.id.logOut:
 //                logging out implementation
-                signOutmAuth.signOut();
+//                signOutmAuth.signOut();
                 Intent logIntent = new Intent(this, FirstScreen.class);
                 startActivity(logIntent);
 //                Toast.makeText(this, "Log Out Implementation Coming Soon", Toast.LENGTH_SHORT).show();

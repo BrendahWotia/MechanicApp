@@ -29,7 +29,7 @@ public class Profile extends AppCompatActivity {
             case R.id.logOut:
 //                logging out implementation
 //                Toast.makeText(this, "Log Out Implementation Coming Soon", Toast.LENGTH_SHORT).show();
-                mechAuth.signOut();
+//                mechAuth.signOut();
                 Intent logIntent = new Intent(this, FirstScreen.class);
                 startActivity(logIntent);
                 return true;
