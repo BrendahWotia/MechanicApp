@@ -59,10 +59,10 @@ public class Mechanic extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("Mechanics");
 //        database = FirebaseDatabase.getInstance();
 //        mechanicReference = database.getReference("Mechanics");
-        name = findViewById(R.id.etName);
-        phone = findViewById(R.id.etPhone);
-        location = findViewById(R.id.etLocation);
-        email = findViewById(R.id.etEmail);
+        name = findViewById(R.id.etMechUserName);
+        phone = findViewById(R.id.etMechPhone);
+        location = findViewById(R.id.etMechLocation);
+        email = findViewById(R.id.etMechMail);
         uploadButton = findViewById(R.id.uploadDBtn);
         mechImage = findViewById(R.id.imageViewMechanic);
 //        imageBtn = findViewById(R.id.imageDBtn);

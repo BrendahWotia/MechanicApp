@@ -36,7 +36,8 @@
             android:parentActivityName=".Mechanic"/>
         <activity android:name=".Driver"
             android:parentActivityName=".MainActivity"/>
-        <activity android:name=".Mechanic" />
+        <activity android:name=".Mechanic"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 

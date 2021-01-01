@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class signIn extends AppCompatActivity {
     private static FirebaseAuth signInmAuth;
-    private EditText signInMail, signInPassword, test , testp;
+    private EditText signInMail, signInPassword ;
     private Button signInBtn;
     private static String TAG = "SIGN IN";
 
@@ -40,8 +40,6 @@ public class signIn extends AppCompatActivity {
 
         signInMail = findViewById(R.id.etSignInMail);
         signInPassword = findViewById(R.id.etPassword_signIn);
-        test = findViewById(R.id.matrialEt);
-        testp = findViewById(R.id.matrialEtPass);
 
         signInBtn = findViewById(R.id.nextBtn_signIn);
 
@@ -49,8 +47,7 @@ public class signIn extends AppCompatActivity {
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String mail = test.getText().toString().trim();
-//                Toast.makeText(signIn.this, "Maail : " + mail, Toast.LENGTH_SHORT).show();
+
                 if (isNetworkConnected()) {
                     String email = signInMail.getText().toString().trim();
                     String password = signInPassword.getText().toString().trim();
@@ -120,11 +117,8 @@ public class signIn extends AppCompatActivity {
     }
 
     public void tv_to_signUp(View view) {
-        String mail = test.getText().toString().trim();
-        String pass = testp.getText().toString().trim();
-        Toast.makeText(signIn.this, "Mail : " + mail + "Pass : " + pass, Toast.LENGTH_SHORT).show();
-//        Intent tv_signIntent = new Intent(signIn.this, signUp.class);
-//        startActivity(tv_signIntent);
+        Intent tv_signIntent = new Intent(signIn.this, signUp.class);
+        startActivity(tv_signIntent);
     }
 
     public void forgotPassword(View view) {
