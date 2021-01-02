@@ -1,4 +1,4 @@
-package com.example.mobilemechanic;
+package com.example.mobilemechanic.bridge;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.mobilemechanic.viewScreen.Driver;
+import com.example.mobilemechanic.Registration.Mechanic;
+import com.example.mobilemechanic.R;
 
 public class MainActivity extends AppCompatActivity {
 

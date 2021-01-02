@@ -14,17 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MechanicDetails"
-            android:parentActivityName=".Driver"></activity>
-        <activity android:name=".signIn"
+        <activity android:name=".viewScreen.MechanicDetails"
+            android:parentActivityName=".viewScreen.Driver"></activity>
+        <activity android:name=".Registration.signIn"
             android:label="Verification"
-            android:parentActivityName=".FirstScreen"/>
-        <activity android:name=".signUp"
+            android:parentActivityName=".bridge.FirstScreen"/>
+        <activity android:name=".Registration.signUp"
             android:label="Registration"
-            android:parentActivityName=".FirstScreen">
+            android:parentActivityName=".bridge.FirstScreen">
 
         </activity>
-        <activity android:name=".FirstScreen"
+        <activity android:name=".bridge.FirstScreen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,13 +32,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Profile"
-            android:parentActivityName=".Mechanic"/>
-        <activity android:name=".Driver"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".Mechanic"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".MainActivity"
+        <activity android:name=".viewScreen.Profile"
+            android:parentActivityName=".Registration.Mechanic"/>
+        <activity android:name=".viewScreen.Driver"
+            android:parentActivityName=".bridge.MainActivity"/>
+        <activity android:name=".Registration.Mechanic"
+            android:parentActivityName=".bridge.MainActivity"/>
+        <activity android:name=".bridge.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <!-- <intent-filter> -->

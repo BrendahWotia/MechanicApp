@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".Driver">
+    tools:context=".viewScreen.Driver">
 
     <ProgressBar
         android:id="@+id/progressBarCircle"

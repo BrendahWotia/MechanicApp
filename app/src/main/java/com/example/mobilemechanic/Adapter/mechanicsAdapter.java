@@ -1,4 +1,4 @@
-package com.example.mobilemechanic;
+package com.example.mobilemechanic.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mobilemechanic.viewScreen.MechanicDetails;
+import com.example.mobilemechanic.Model.MechanicModel;
+import com.example.mobilemechanic.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

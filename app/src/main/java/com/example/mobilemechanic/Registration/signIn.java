@@ -1,4 +1,4 @@
-package com.example.mobilemechanic;
+package com.example.mobilemechanic.Registration;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mobilemechanic.bridge.MainActivity;
+import com.example.mobilemechanic.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

@@ -1,4 +1,4 @@
-package com.example.mobilemechanic;
+package com.example.mobilemechanic.viewScreen;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mobilemechanic.R;
 import com.squareup.picasso.Picasso;
 
 public class MechanicDetails extends AppCompatActivity {

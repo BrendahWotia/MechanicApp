@@ -1,4 +1,4 @@
-package com.example.mobilemechanic;
+package com.example.mobilemechanic.bridge;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.mobilemechanic.R;
+import com.example.mobilemechanic.Registration.signUp;
 
 public class FirstScreen extends AppCompatActivity {
 Button signIn, signOut;
@@ -21,7 +24,7 @@ Button signIn, signOut;
             @Override
             public void onClick(View v) {
 
-                Intent signInIntent = new Intent(FirstScreen.this, signIn.class);
+                Intent signInIntent = new Intent(FirstScreen.this, com.example.mobilemechanic.Registration.signIn.class);
                 startActivity(signInIntent);
             }
         });
