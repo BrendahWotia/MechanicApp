@@ -42,7 +42,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/recyclePhone"
+                    android:id="@+id/recycleSpeciality"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -50,14 +50,14 @@
                     android:textStyle="bold"
                     />
 
-                <TextView
-                    android:id="@+id/recycleEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="TextView"
-                    android:textStyle="bold"
-                     />
+<!--                <TextView-->
+<!--                    android:id="@+id/recycleEmail"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:text="TextView"-->
+<!--                    android:textStyle="bold"-->
+<!--                     />-->
 
                 <TextView
                     android:id="@+id/recycleLocation"

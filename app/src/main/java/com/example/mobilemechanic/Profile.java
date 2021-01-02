@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 public class Profile extends AppCompatActivity {
 
     ImageView profileImage;
-    TextView tvName, tvMail, tvPhone, tvLocation ;
+    TextView tvName, tvMail, tvPhone, tvLocation, tvSpeciality ;
     FirebaseAuth mechAuth;
 
     @Override
@@ -62,6 +62,7 @@ public class Profile extends AppCompatActivity {
         tvMail = findViewById(R.id.tvMail);
         tvPhone = findViewById(R.id.tvPhone);
         tvLocation = findViewById(R.id.tvLocation);
+        tvSpeciality = findViewById(R.id.tvSpeciality);
 
         personalProductsIntents();
 
@@ -69,19 +70,22 @@ public class Profile extends AppCompatActivity {
     }
     private void personalProductsIntents() {
         if (getIntent().hasExtra("phone") && getIntent().hasExtra("name") && getIntent().hasExtra("location") &&
-                getIntent().hasExtra("mail") && getIntent().hasExtra("image") ) {
-            String pName, pLocation, pMail, pImage, pPhone;
+                getIntent().hasExtra("mail") && getIntent().hasExtra("image") && getIntent().hasExtra("speciality") ) {
+            String pName, pLocation, pMail, pImage, pPhone, pSpeciality;
             pPhone = getIntent().getStringExtra("phone");
             pName = getIntent().getStringExtra("name");
             pLocation = getIntent().getStringExtra("location");
             pMail = getIntent().getStringExtra("mail");
             pImage = getIntent().getStringExtra("image");
+            pSpeciality = getIntent().getStringExtra("speciality");
+
 
 
             tvName.setText("Name :            " + pName);
             tvMail.setText("E-Mail Address :         " + pMail);
             tvPhone.setText("Phone Number :         " + pPhone);
             tvLocation.setText("Location :          " + pLocation);
+            tvSpeciality.setText("Specialization :      " + pSpeciality);
 
             Picasso.get().load(pImage).placeholder(R.drawable.ic_image_black_24dp).into(profileImage);
             Toast.makeText(this, "Saving Profile SuccessFull...", Toast.LENGTH_SHORT).show();

@@ -42,7 +42,7 @@
                         android:layout_height="wrap_content"
                         android:text="More Detail About The Mechanic : "
                         android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:textSize="22sp" />
 
                     <LinearLayout
                         android:id="@+id/MechNameLayout"
@@ -55,6 +55,8 @@
                         <TextView
                             android:id="@+id/tv_MechName"
                             android:layout_width="0dp"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_weight="40"
@@ -67,6 +69,41 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_weight="60"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:text="TextView"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/MechSpecialityLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:id="@+id/tv_MechSpeciality"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="40"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:text="Specialization Area : "
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tv_detailMechSpeciality"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="60"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
                             android:text="TextView"
                             android:textColor="@color/black" />
                     </LinearLayout>
@@ -85,6 +122,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_weight="40"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
                             android:text="Mechanic Location : "
                             android:textColor="@color/black" />
 
@@ -94,6 +133,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_weight="60"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
                             android:text="TextView"
                             android:textColor="@color/black" />
                     </LinearLayout>
@@ -107,7 +148,7 @@
                     android:layout_margin="8dp"
                     android:text="Contact Details Of Mechanic : "
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="50dp"

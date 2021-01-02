@@ -46,10 +46,7 @@ public class Driver extends AppCompatActivity {
     List<MechanicModel> mechanicList;
     List<MechanicModel> filteredProductsList;
     EditText searchText;
-    String pPhone;
     ProgressBar circleP_bar;
-    FirebaseAuth signOutmAuth;
-    MechanicModel personalProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,7 +180,7 @@ public class Driver extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String uid = snapshot.getKey();
                     String pName = snapshot.child("name").getValue(String.class);
-                    String pEmail = snapshot.child("email").getValue(String.class);
+                    String pSpeciality = snapshot.child("speciality").getValue(String.class);
                     String pLocation = snapshot.child("location").getValue(String.class);
 
 //                    Products filteredProduct = snapshot.getValue(Products.class);
@@ -197,10 +194,10 @@ public class Driver extends AppCompatActivity {
                             filteredProductsList.add(modelFiltered);
                         }
 
-                        if (pEmail.equals(null)) {
-                            Toast.makeText(Driver.this, "Mail is Null", Toast.LENGTH_SHORT).show();
+                        if (pSpeciality.equals(null)) {
+                            Toast.makeText(Driver.this, "Specialization is Null", Toast.LENGTH_SHORT).show();
                         } else {
-                            if (pEmail.toLowerCase().contains(queryString.toLowerCase())) {
+                            if (pSpeciality.toLowerCase().contains(queryString.toLowerCase())) {
                                 filteredProductsList.add(modelFiltered);
                             }
 

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,8 +44,8 @@ public class mechanicsAdapter extends RecyclerView.Adapter<mechanicsAdapter.mech
         final MechanicModel currentMechanic = mechanicList.get(position);
         holder.recName.setText("Name : " + currentMechanic.getName());
         holder.recLocation.setText("Location : " + currentMechanic.getLocation());
-        holder.recPhone.setText("Phone Number : " + currentMechanic.getPhone());
-        holder.recMail.setText("Email : " + currentMechanic.getEmail());
+        holder.recSpec.setText("Specialization : " + currentMechanic.getSpeciality());
+//        holder.recMail.setText("Email : " + currentMechanic.getEmail());
         Picasso.get()
                 .load(currentMechanic.getImageUrl())
                 .placeholder(R.drawable.ic_image_black_24dp)
@@ -64,6 +63,7 @@ public class mechanicsAdapter extends RecyclerView.Adapter<mechanicsAdapter.mech
                     passIntent.putExtra("mail", currentMechanic.getEmail());
                     passIntent.putExtra("image", currentMechanic.getImageUrl());
                     passIntent.putExtra("phone", currentMechanic.getPhone());
+                    passIntent.putExtra("speciality", currentMechanic.getSpeciality());
 
                     mcontext.startActivity(passIntent);
                     Log.d(TAG, "onClick: detail view...");
@@ -87,7 +87,7 @@ public class mechanicsAdapter extends RecyclerView.Adapter<mechanicsAdapter.mech
     public class mechanicsViewHolder extends RecyclerView.ViewHolder {
 
         ImageView recImage;
-        TextView recName, recLocation, recPhone, recMail;
+        TextView recName, recLocation, recSpec, recMail;
         LinearLayout clickedLayout;
 
         public mechanicsViewHolder(@NonNull View itemView) {
@@ -96,8 +96,8 @@ public class mechanicsAdapter extends RecyclerView.Adapter<mechanicsAdapter.mech
             recImage = itemView.findViewById(R.id.recycleImage);
             recName = itemView.findViewById(R.id.recycleName);
             recLocation = itemView.findViewById(R.id.recycleLocation);
-            recPhone = itemView.findViewById(R.id.recyclePhone);
-            recMail = itemView.findViewById(R.id.recycleEmail);
+            recSpec = itemView.findViewById(R.id.recycleSpeciality);
+//            recMail = itemView.findViewById(R.id.recycleEmail);
             clickedLayout = itemView.findViewById(R.id.rec);
         }
     }

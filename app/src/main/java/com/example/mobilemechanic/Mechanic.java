@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,7 +37,7 @@ public class Mechanic extends AppCompatActivity {
     Uri image_uri;
     Button uploadButton ;
     ImageView mechImage;
-    String nameMech, phoneMech, locationMech, emailMech;
+    String nameMech, phoneMech, locationMech, emailMech, spec;
     FirebaseDatabase database ;
     DatabaseReference mechanicReference ;
     MechanicModel mechanic ;
@@ -44,6 +46,7 @@ public class Mechanic extends AppCompatActivity {
     private ProgressBar mProgress;
     public static final int IMAGE_REQUEST = 1;
     private static final int PERMISSION_CODE = 1000;
+    private AutoCompleteTextView autoCompleteTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,14 @@ public class Mechanic extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         setTitle("New Mechanic");
+
+//        Drop down list of mechanics
+        String [] specification = new String[] {"Service Technicians", "Diagnostic Technicians", "Brake and Transmission Technicians", "Body Repair Technicians",
+        "Vehicle Refinishers", "Vehicle Inspectors", "General"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdown, specification);
+
+        autoCompleteTextView = findViewById(R.id.specList);
+        autoCompleteTextView.setAdapter(adapter);
 
         storageReference = FirebaseStorage.getInstance().getReference("Mechanics");
         databaseReference = FirebaseDatabase.getInstance().getReference("Mechanics");
@@ -76,6 +87,7 @@ public class Mechanic extends AppCompatActivity {
             public void onClick(View v) {
 //                mProgress.setVisibility(View.VISIBLE);
 //                uploadDetails();
+//                Toast.makeText(Mechanic.this, "Value : " + autoCompleteTextView.getText().toString().trim(), Toast.LENGTH_SHORT).show();
                 receiveEntries();
             }
         });
@@ -140,16 +152,14 @@ public class Mechanic extends AppCompatActivity {
                                 }, 500);
                                 Toast.makeText(Mechanic.this, "Upload Successful..." + sImage, Toast.LENGTH_SHORT).show();
 
-                                mechanic = new MechanicModel(nameMech, phoneMech,locationMech, emailMech, sImage);
-//                                product = new Products(sName, sPhone, sLocation, sImage, sPrice, sCapacity, sEmail);
+                                mechanic = new MechanicModel(nameMech, phoneMech,locationMech, emailMech, sImage, spec);
                                 String key = databaseReference.push().getKey();
-//                                product.setID(key);
                                 mechanic.setId(key);
                                 databaseReference.child(key).setValue(mechanic);
 
                                 Toast.makeText(Mechanic.this, "Success Key retention...", Toast.LENGTH_LONG).show();
                                 mProgress.setVisibility(View.INVISIBLE);
-                                backToProfile(nameMech, phoneMech,locationMech, emailMech, sImage);
+                                backToProfile(nameMech, phoneMech,locationMech, emailMech, sImage, spec);
                                 name.setText("");
                                 location.setText("");
                                 phone.setText("");
@@ -184,7 +194,7 @@ public class Mechanic extends AppCompatActivity {
         return extension;
     }
 
-    private void backToProfile(String nameMech, String phoneMech, String locationMech, String emailMech, String imageMech) {
+    private void backToProfile(String nameMech, String phoneMech, String locationMech, String emailMech, String imageMech, String special) {
         Intent backIntent = new Intent(this, Profile.class);
         backIntent.putExtra("phone", phoneMech);
         backIntent.putExtra("name", nameMech);
@@ -193,6 +203,7 @@ public class Mechanic extends AppCompatActivity {
 //        backIntent.putExtra("capacity", product.getCapacity());
         backIntent.putExtra("mail", emailMech);
         backIntent.putExtra("image", imageMech);
+        backIntent.putExtra("speciality", special);
 //        backIntent.putExtra("key", key);
         Toast.makeText(this, "Successful Upload of Details..", Toast.LENGTH_SHORT).show();
 //
@@ -216,12 +227,14 @@ public class Mechanic extends AppCompatActivity {
         phoneMech = phone.getText().toString().trim();
         locationMech = location.getText().toString().trim();
         emailMech = email.getText().toString().trim();
+        spec = autoCompleteTextView.getText().toString().trim();
 
         checkFields();
     }
 
     private void checkFields() {
-            if (nameMech.isEmpty() || phoneMech.isEmpty() || locationMech.isEmpty() || emailMech.isEmpty() || image_uri == null) {
+            if (nameMech.isEmpty() || phoneMech.isEmpty() || locationMech.isEmpty() || emailMech.isEmpty() || image_uri == null
+            || spec.isEmpty()) {
                 Toast.makeText(this, "Missing Fields...", Toast.LENGTH_SHORT).show();
             } else {
 

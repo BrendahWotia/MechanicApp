@@ -144,6 +144,35 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedSpecification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_construction"
+            android:hint="Specialization"
+            app:placeholderText="Specialization"
+            app:startIconContentDescription="State Your Speciality in Mechanic Repair"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintTop_toBottomOf="@id/outlinedMechLocation"
+            android:orientation="horizontal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            >
+
+        <AutoCompleteTextView
+            android:id="@+id/specList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 <!--        <EditText-->
 <!--            android:id="@+id/etName"-->
 <!--            android:layout_width="0dp"-->
@@ -188,7 +217,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/outlinedMechLocation" />
+            app:layout_constraintTop_toBottomOf="@id/outlinedSpecification" />
 
 
 

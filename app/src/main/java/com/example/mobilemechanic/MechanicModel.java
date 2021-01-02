@@ -9,6 +9,24 @@ public class MechanicModel {
     private String email;
     private String imageUrl;
     private String id;
+    private String speciality;
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
+
+    public MechanicModel(String name, String phone, String location, String email, String imageUrl, String speciality) {
+        this.name = name;
+        this.phone = phone;
+        this.location = location;
+        this.email = email;
+        this.imageUrl = imageUrl;
+        this.speciality = speciality;
+    }
 
     public MechanicModel(String name, String phone, String location, String email, String imageUrl) {
         this.name = name;

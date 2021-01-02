@@ -20,8 +20,8 @@ import com.squareup.picasso.Picasso;
 
 public class MechanicDetails extends AppCompatActivity {
     private static final int CALL_PERMISSION = 30;
-    String mechName, mechLocation, mechMail, mechImage, mechPhone;
-    TextView tv_name, tv_location, tv_mail, tv_phone;
+    String mechName, mechLocation, mechMail, mechImage, mechPhone, mechSpeciality;
+    TextView tv_name, tv_location, tv_mail, tv_phone, tv_speciality;
     ImageView mechanicImage;
 
     @Override
@@ -36,6 +36,7 @@ public class MechanicDetails extends AppCompatActivity {
 
         tv_name = findViewById(R.id.tv_detailMechName);
         tv_location = findViewById(R.id.tv_detailMechLocation);
+        tv_speciality = findViewById(R.id.tv_detailMechSpeciality);
         tv_mail = findViewById(R.id.tv_detailEmail);
         tv_phone = findViewById(R.id.tv_detailMechPhone);
         mechanicImage = findViewById(R.id.detailMechImage);
@@ -45,23 +46,25 @@ public class MechanicDetails extends AppCompatActivity {
 
     private void receiveIntents() {
         if (getIntent().hasExtra("name") && getIntent().hasExtra("location") && getIntent().hasExtra("mail")
-                && getIntent().hasExtra("image") & getIntent().hasExtra("phone")) {
+                && getIntent().hasExtra("image") && getIntent().hasExtra("phone") && getIntent().hasExtra("speciality")) {
 
             mechName = getIntent().getStringExtra("name");
             mechLocation = getIntent().getStringExtra("location");
             mechMail = getIntent().getStringExtra("mail");
             mechImage = getIntent().getStringExtra("image");
             mechPhone = getIntent().getStringExtra("phone");
+            mechSpeciality = getIntent().getStringExtra("speciality");
 
-            provision(mechName, mechLocation, mechMail, mechImage, mechPhone);
+            provision(mechName, mechLocation, mechMail, mechImage, mechPhone, mechSpeciality);
         }
     }
 
-    private void provision(String mechName, String mechLocation, String mechMail, String mechImage, String mechPhone) {
+    private void provision(String mechName, String mechLocation, String mechMail, String mechImage, String mechPhone, String speciality) {
         tv_name.setText(mechName);
         tv_location.setText(mechLocation);
         tv_mail.setText(mechMail);
         tv_phone.setText(mechPhone);
+        tv_speciality.setText(speciality);
 
         Picasso.get().load(mechImage).placeholder(R.drawable.ic_image_black_24dp)
                 .into(mechanicImage);
