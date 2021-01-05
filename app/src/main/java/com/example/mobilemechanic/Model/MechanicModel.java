@@ -1,4 +1,6 @@
-package com.example.mobilemechanic;
+package com.example.mobilemechanic.Model;
+
+import com.google.firebase.database.Exclude;
 
 public class MechanicModel {
     private String name;
@@ -6,6 +8,25 @@ public class MechanicModel {
     private String location;
     private String email;
     private String imageUrl;
+    private String id;
+    private String speciality;
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
+
+    public MechanicModel(String name, String phone, String location, String email, String imageUrl, String speciality) {
+        this.name = name;
+        this.phone = phone;
+        this.location = location;
+        this.email = email;
+        this.imageUrl = imageUrl;
+        this.speciality = speciality;
+    }
 
     public MechanicModel(String name, String phone, String location, String email, String imageUrl) {
         this.name = name;
@@ -15,6 +36,22 @@ public class MechanicModel {
         this.imageUrl = imageUrl;
     }
 
+
+    public MechanicModel() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    @Exclude
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    //    public MechanicModel(String nameMech, String phoneMech, String emailMech, String sImage) {
+//
+//    }
 
     public String getName() {
         return name;

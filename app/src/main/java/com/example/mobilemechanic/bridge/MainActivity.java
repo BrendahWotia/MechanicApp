@@ -1,4 +1,4 @@
-package com.example.mobilemechanic;
+package com.example.mobilemechanic.bridge;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.mobilemechanic.viewScreen.Driver;
+import com.example.mobilemechanic.Registration.Mechanic;
+import com.example.mobilemechanic.R;
+
 public class MainActivity extends AppCompatActivity {
 
     Button mechanic, driver;
@@ -14,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         mechanic = findViewById(R.id.mechanicBtn);
         driver = findViewById(R.id.driverBtn);
@@ -35,5 +40,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(driverIntent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        View decorView = getWindow().getDecorView();
+// Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+
     }
 }

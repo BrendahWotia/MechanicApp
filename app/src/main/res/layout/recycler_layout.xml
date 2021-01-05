@@ -8,7 +8,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="5dp"
         app:cardCornerRadius="5dp">
 
@@ -21,14 +21,14 @@
             <ImageView
                 android:id="@+id/recycleImage"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
                 android:layout_weight="70"
                 app:srcCompat="@drawable/ic_image_black_24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_weight="30"
                 android:orientation="vertical">
@@ -42,21 +42,22 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/recycleEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="TextView"
-                    android:textStyle="bold"
-                     />
-                <TextView
-                    android:id="@+id/recyclePhone"
+                    android:id="@+id/recycleSpeciality"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:text="TextView"
                     android:textStyle="bold"
                     />
+
+<!--                <TextView-->
+<!--                    android:id="@+id/recycleEmail"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:text="TextView"-->
+<!--                    android:textStyle="bold"-->
+<!--                     />-->
 
                 <TextView
                     android:id="@+id/recycleLocation"
@@ -66,15 +67,6 @@
                     android:text="TextView"
                     android:textStyle="bold"
                     />
-
-<!--                <TextView-->
-<!--                    android:id="@+id/recyclePrice"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center_horizontal"-->
-<!--                    android:text="TextView"-->
-<!--                    android:textSize="@dimen/eighteen_sp"-->
-<!--                    android:textStyle="bold" />-->
             </LinearLayout>
         </LinearLayout>
 

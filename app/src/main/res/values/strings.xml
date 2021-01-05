@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">MobileMechanic</string>
+    <string name="app_name">Mobile Mechanic</string>
+    <string name="No_network">Connection Lost...</string>
 </resources>
