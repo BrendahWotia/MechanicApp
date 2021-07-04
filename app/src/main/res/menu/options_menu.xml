@@ -3,4 +3,7 @@
 <item
     android:id="@+id/logOut"
     android:title="Log Out"/>
+    <item
+        android:id="@+id/mapSelection"
+        android:title="Map View"/>
 </menu>

@@ -55,7 +55,7 @@ public class Driver extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        setTitle("Mechanic List");
+        setTitle("Mechanic List ");
 
         defaultView = findViewById(R.id.defaultView);
 
@@ -141,6 +141,7 @@ public class Driver extends AppCompatActivity {
                         circleP_bar.setVisibility(View.INVISIBLE);
                     }
 
+                    Toast.makeText(Driver.this, "Value : " + mechanicList.size(), Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();
                     circleP_bar.setVisibility(View.INVISIBLE);
                 }
@@ -241,6 +242,14 @@ public class Driver extends AppCompatActivity {
 //                Toast.makeText(this, "Log Out Implementation Coming Soon", Toast.LENGTH_SHORT).show();
 
                 return true;
+
+            case R.id.mapSelection:
+
+                Intent mapIntent = new Intent(this, MapViewScreen.class);
+                startActivity(mapIntent);
+
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
