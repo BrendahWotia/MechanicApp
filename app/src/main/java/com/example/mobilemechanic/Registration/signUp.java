@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class signUp extends AppCompatActivity {
     private static FirebaseAuth mAuth;
 
-    EditText etPassword, etUserName, etPhone, etMail, etConfirmPassword, etLocation;
+    EditText etPassword, etUserName, etPhone, etMail, etConfirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class signUp extends AppCompatActivity {
         etUserName = findViewById(R.id.etUserName);
         etPhone = findViewById(R.id.etPhone);
         etConfirmPassword = findViewById(R.id.etConfirmPassword_signUp);
-        etLocation = findViewById(R.id.etLocation);
+//        etLocation = findViewById(R.id.etLocation);
 
         Button registerBtn = findViewById(R.id.registerBtn_signUp);
 
@@ -65,7 +65,7 @@ public class signUp extends AppCompatActivity {
                     String confirmPassword = etConfirmPassword.getText().toString().trim();
                     String userName = etUserName.getText().toString().trim();
                     String phone = etPhone.getText().toString().trim();
-                    String location = etLocation.getText().toString().trim();
+//                    String location = etLocation.getText().toString().trim();
 
                     if (userName.isEmpty()) {
                         etUserName.setError("User Name Required");
@@ -79,8 +79,8 @@ public class signUp extends AppCompatActivity {
                     } else if (phone.length() < 10) {
                         etPhone.setError("Phone Number Too Short");
 
-                    } else if (location.isEmpty()) {
-                        etLocation.setError("Location Required");
+//                    } else if (location.isEmpty()) {
+//                        etLocation.setError("Location Required");
 
                     } else if (password.isEmpty()) {
                         etPassword.setError("Password Required");

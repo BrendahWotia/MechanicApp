@@ -130,13 +130,14 @@
             android:layout_marginRight="10dp"
             android:layout_marginStart="10dp"
             app:counterEnabled="true"
-            app:counterMaxLength="20"
+            app:counterMaxLength="50"
             app:layout_constraintTop_toBottomOf="@id/outlinedMechPhone"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:inputType="text"
+
                 android:layout_height="wrap_content"
                 android:id="@+id/etMechLocation"
                 android:drawablePadding="8dp"

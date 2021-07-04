@@ -98,35 +98,35 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/outlinedLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:startIconDrawable="@drawable/ic_location"
-        android:hint="Location"
-        app:placeholderText="Location"
-        app:startIconContentDescription="State your region"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginStart="10dp"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
-        app:layout_constraintTop_toBottomOf="@id/outlinedPhone"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/outlinedLocation"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:startIconDrawable="@drawable/ic_location"-->
+<!--        android:hint="Location"-->
+<!--        app:placeholderText="Location"-->
+<!--        app:startIconContentDescription="State your region"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_marginTop="1dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        app:counterEnabled="true"-->
+<!--        app:counterMaxLength="20"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/outlinedPhone"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:inputType="text"
-            android:layout_height="wrap_content"
-            android:id="@+id/etLocation"
-            android:drawablePadding="8dp"
-            />
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:inputType="text"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/etLocation"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            />-->
 
-    </com.google.android.material.textfield.TextInputLayout>
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/outlinedPassword"
         android:layout_width="match_parent"
@@ -145,7 +145,7 @@
         app:counterEnabled="true"
         app:counterMaxLength="20"
         app:endIconMode="password_toggle"
-        app:layout_constraintTop_toBottomOf="@id/outlinedLocation"
+        app:layout_constraintTop_toBottomOf="@id/outlinedPhone"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText

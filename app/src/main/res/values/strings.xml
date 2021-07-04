@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Mobile Mechanic</string>
     <string name="No_network">Connection Lost...</string>
+    <string name="public_token">pk.eyJ1IjoiY29kZS1nZW5lcmFsIiwiYSI6ImNra2NtcjBwcTBsaXMyb29hMGw4ZzFnZXIifQ.MmdOkaY4tpy2MauYCPB-Mg</string>
 </resources>
