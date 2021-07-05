@@ -90,6 +90,20 @@ public class MechanicDetails extends AppCompatActivity {
 
     }
 
+    public void direction(View view){
+        Intent passIntent = new Intent(MechanicDetails.this, NavigationScreen.class);
+//        passIntent.putExtra("name", currentMechanic.getName());
+//        passIntent.putExtra("location", currentMechanic.getLocation());
+//        passIntent.putExtra("mail", currentMechanic.getEmail());
+//        passIntent.putExtra("image", currentMechanic.getImageUrl());
+//        passIntent.putExtra("phone", currentMechanic.getPhone());
+//        passIntent.putExtra("speciality", currentMechanic.getSpeciality());
+        passIntent.putExtra("latitude", mechLatitude);
+        passIntent.putExtra("longitude", mechLongitude);
+
+        startActivity(passIntent);
+    }
+
     public void phoning(View view) {
         if (Build.VERSION.SDK_INT >= 23){
             if (checkedPermission()){

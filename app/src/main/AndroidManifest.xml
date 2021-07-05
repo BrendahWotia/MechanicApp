@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".viewScreen.MapViewScreen"></activity>
+        <activity android:name=".viewScreen.NavigationScreen"></activity>
+        <activity android:name=".viewScreen.MapViewScreen" />
         <activity
             android:name=".viewScreen.MechanicDetails"
             android:parentActivityName=".viewScreen.Driver" />
@@ -25,7 +26,7 @@
         <activity
             android:name=".Registration.signUp"
             android:label="Registration"
-            android:parentActivityName=".bridge.FirstScreen"></activity>
+            android:parentActivityName=".bridge.FirstScreen" />
         <activity
             android:name=".bridge.FirstScreen"
             android:theme="@style/AppTheme.NoActionBar">
