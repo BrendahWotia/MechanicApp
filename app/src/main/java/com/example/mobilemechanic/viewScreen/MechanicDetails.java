@@ -21,8 +21,8 @@ import com.squareup.picasso.Picasso;
 
 public class MechanicDetails extends AppCompatActivity {
     private static final int CALL_PERMISSION = 30;
-    String mechName, mechLocation, mechMail, mechImage, mechPhone, mechSpeciality;
-    TextView tv_name, tv_location, tv_mail, tv_phone, tv_speciality;
+    String mechName, mechLocation, mechMail, mechImage, mechPhone, mechSpeciality, mechLatitude, mechLongitude;
+    TextView tv_name, tv_location, tv_mail, tv_phone, tv_speciality, tv_latitude, tv_longitude;
     ImageView mechanicImage;
 
     @Override
@@ -41,6 +41,8 @@ public class MechanicDetails extends AppCompatActivity {
         tv_mail = findViewById(R.id.tv_detailEmail);
         tv_phone = findViewById(R.id.tv_detailMechPhone);
         mechanicImage = findViewById(R.id.detailMechImage);
+        tv_latitude = findViewById(R.id.tv_latitude);
+        tv_longitude = findViewById(R.id.tv_longitude);
 
         receiveIntents();
     }
@@ -55,17 +57,22 @@ public class MechanicDetails extends AppCompatActivity {
             mechImage = getIntent().getStringExtra("image");
             mechPhone = getIntent().getStringExtra("phone");
             mechSpeciality = getIntent().getStringExtra("speciality");
+            mechLatitude = getIntent().getStringExtra("latitude");
+            mechLongitude = getIntent().getStringExtra("longitude");
 
-            provision(mechName, mechLocation, mechMail, mechImage, mechPhone, mechSpeciality);
+            provision(mechName, mechLocation, mechMail, mechImage, mechPhone, mechSpeciality, mechLatitude, mechLongitude);
         }
     }
 
-    private void provision(String mechName, String mechLocation, String mechMail, String mechImage, String mechPhone, String speciality) {
+    private void provision(String mechName, String mechLocation, String mechMail, String mechImage, String mechPhone,
+                           String speciality, String mechLatitude, String mechLongitude) {
         tv_name.setText(mechName);
         tv_location.setText(mechLocation);
         tv_mail.setText(mechMail);
         tv_phone.setText(mechPhone);
         tv_speciality.setText(speciality);
+        tv_longitude.setText(mechLongitude);
+        tv_latitude.setText(mechLatitude);
 
         Picasso.get().load(mechImage).placeholder(R.drawable.ic_image_black_24dp)
                 .into(mechanicImage);

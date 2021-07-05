@@ -60,6 +60,12 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.plugins.annotation.OnSymbolClickListener;
+import com.mapbox.mapboxsdk.plugins.annotation.Symbol;
+import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager;
+import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions;
+import com.mapbox.mapboxsdk.plugins.markerview.MarkerView;
+import com.mapbox.mapboxsdk.plugins.markerview.MarkerViewManager;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
@@ -77,6 +83,7 @@ import retrofit2.Response;
 
 import static com.example.mobilemechanic.Util.GPSUtils.GPS_REQUEST;
 import static com.mapbox.core.constants.Constants.PRECISION_6;
+import static com.mapbox.mapboxsdk.style.layers.Property.ICON_ROTATION_ALIGNMENT_VIEWPORT;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineCap;
@@ -110,6 +117,12 @@ public class MapViewScreen extends AppCompatActivity {
     FirebaseStorage storage;
     ArrayList<MechanicModel> mechanicList;
     mechanicsAdapter adapter;
+    private SymbolManager symbolManager;
+    private Symbol symbol;
+    private MarkerView markerView;
+    private MarkerViewManager markerViewManager;
+//    private SymbolManager symbolManager;
+    private List<Symbol> symbols = new ArrayList<>();
 //    private EditText sourceText, destinationText;
 
     @Override
@@ -193,8 +206,7 @@ public class MapViewScreen extends AppCompatActivity {
             Toast.makeText(this, "Okello Check out", Toast.LENGTH_LONG).show();
         }
         mapView = (MapView) findViewById(R.id.mapView);
-//        sourceText = findViewById(R.id.source);
-//        destinationText = findViewById(R.id.destination);
+
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -219,12 +231,8 @@ public class MapViewScreen extends AppCompatActivity {
                             }
                         }
                         style.addImage(symbolIconId, BitmapUtils.getBitmapFromDrawable(
-                                getResources().getDrawable(R.drawable.marker_location)));
+                                getResources().getDrawable(R.drawable.ic_baseline_construction_24)));
 
-//                        for (int i = 0; i < 4; i++){
-//                            eachMechanic(style, 34.0 + i , 0.3 + i);
-//                        }
-//                        setUpMechanics(style);
                         ArrayList<MechanicModel> mechanicModels = new ArrayList<>();
 
                         mechanicModels.add( new MechanicModel("okello", "0712", "lop", "ed", "re", "df", "34.5", "0.3"));
@@ -232,11 +240,91 @@ public class MapViewScreen extends AppCompatActivity {
                         mechanicModels.add( new MechanicModel("enos", "0712", "lop", "ed", "re", "df", "24.5", "0.2"));
 
                         // Create an empty GeoJSON source using the empty feature collection
-                        setUpSource(style, mechanicList);
+//                        setUpSource(style, mechanicList);
 
-//                        setUpDestination(style);
+                        // Create symbol manager object.
+                        SymbolManager symbolManager = new SymbolManager(mapView, mapboxMap, style);
 
-//                        setRouteLayer(style);
+//                        symbolManager = new SymbolManager(mapView, mbMap, style);
+                        symbolManager.setIconAllowOverlap(true);  //your choice t/f
+                        symbolManager.setTextAllowOverlap(false);  //your choice t/f
+// Add click listeners if desired.
+                        symbolManager.addClickListener(new OnSymbolClickListener() {
+                            @Override
+                            public boolean onAnnotationClick(Symbol symbol) {
+                                Toast.makeText(MapViewScreen.this, "Section Clicked" + symbol.getLatLng(), Toast.LENGTH_SHORT).show();
+
+                               MechanicModel currentMechanic = new MechanicModel();
+
+                               for(MechanicModel mech : mechanicList){
+                                   if(Double.parseDouble(mech.getLatitude()) == symbol.getLatLng().getLatitude()
+                                    && Double.parseDouble(mech.getLongitude()) == symbol.getLatLng().getLongitude()){
+                                       currentMechanic = mech;
+                                   }
+                               }
+
+                                Intent passIntent = new Intent(MapViewScreen.this, MechanicDetails.class);
+                                passIntent.putExtra("name", currentMechanic.getName());
+                                passIntent.putExtra("location", currentMechanic.getLocation());
+                                passIntent.putExtra("mail", currentMechanic.getEmail());
+                                passIntent.putExtra("image", currentMechanic.getImageUrl());
+                                passIntent.putExtra("phone", currentMechanic.getPhone());
+                                passIntent.putExtra("speciality", currentMechanic.getSpeciality());
+                                passIntent.putExtra("latitude", currentMechanic.getLatitude());
+                                passIntent.putExtra("longitude", currentMechanic.getLongitude());
+
+                                startActivity(passIntent);
+
+                                return true;
+                            }
+                        });
+
+//                        List<SymbolOptions> options = new ArrayList<>();
+//                        for (int i = 0; i < 5; i++) {
+//                            options.add(new SymbolOptions()
+//                                    .withLatLng(new LatLng(0.3 + i,30.0 + i))
+//                                    .withIconImage(symbolIconId)
+////                                    set the below attributes according to your requirements
+//                                    .withIconSize(1.5f)
+//                                    .withIconOffset(new Float[] {0f,-0.5f})
+////                                    .withZIndex(10)
+//                                    .withTextField("test marker okello observe")
+//                                    .withTextHaloColor("rgba(255, 255, 255, 9)")
+//                                    .withTextColor("rgba(255, 152, 0, 100)")
+//                                    .withTextSize(10.0f)
+//                                    .withTextHaloWidth(5.0f)
+//                                    .withTextJustify("center")
+//                                    .withTextAnchor("top")
+//                                    .withTextOffset(new Float[] {0f, 1.5f})
+////                                    .setDraggable(false)
+//                            );
+//                        }
+
+//                        symbols = symbolManager.create(options);
+
+
+
+                        List<SymbolOptions> mechanicOptions = new ArrayList<>();
+                        for (MechanicModel modelOption : mechanicList) {
+                            mechanicOptions.add(new SymbolOptions()
+                                            .withLatLng(new LatLng(Double.parseDouble(modelOption.getLatitude()),Double.parseDouble(modelOption.getLongitude())))
+                                            .withIconImage(symbolIconId)
+//                                    set the below attributes according to your requirements
+                                            .withIconSize(1.5f)
+                                            .withIconOffset(new Float[] {0f,-0.5f})
+                                            .withTextField(modelOption.getSpeciality())
+                                            .withTextHaloColor("rgba(255, 255, 255, 100)")
+                        .withTextColor("rgba(255, 152, 0, 100)")
+                        .withTextSize(10.0f)
+                        .withTextJustify("center")
+                                            .withTextHaloWidth(5.0f)
+                                            .withTextAnchor("top")
+                                            .withTextOffset(new Float[] {0f, 1.5f})
+//                                    .setDraggable(false)
+                            );
+                        }
+
+                        symbols = symbolManager.create(mechanicOptions);
 
                     }
                 });
@@ -335,77 +423,6 @@ public class MapViewScreen extends AppCompatActivity {
 
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
-    private void setUpMechanics(Style style) {
-
-//        if (origin == null) {
-//            style.addSource(new GeoJsonSource(geojsonSourceLayerId));
-//        } else {
-            //        Add the marker sources to the map
-            style.addSource(new GeoJsonSource(geojsonSourceLayerId + "r",
-                    FeatureCollection.fromFeatures(new Feature[]{
-                            Feature.fromGeometry(Point.fromLngLat(40.0, 24.5)),
-                    })));
-
-//            if (destination != null) {
-//                boundView();
-//            }
-//        }
-        // Add the red marker icon SymbolLayer to the map
-        style.addLayer(new SymbolLayer("layer-idt",
-                geojsonSourceLayerId).withProperties(
-                iconImage(symbolIconId),
-                iconOffset(new Float[]{0f, -8f})
-        ));
-
-    }
-
-    private void eachMechanic(Style style, double mechanicLongitude, double mechanicLatitude) {
-
-//        if (origin == null) {
-//            style.addSource(new GeoJsonSource(geojsonSourceLayerId));
-//        } else {
-        //        Add the marker sources to the map
-        style.addSource(new GeoJsonSource("Layer" + mechanicLatitude,
-                FeatureCollection.fromFeatures(new Feature[]{
-                        Feature.fromGeometry(Point.fromLngLat(mechanicLongitude, mechanicLatitude)),
-                })));
-
-//            if (destination != null) {
-//                boundView();
-//            }
-//        }
-        // Add the red marker icon SymbolLayer to the map
-        style.addLayer(new SymbolLayer("layer-id" + mechanicLatitude,
-                geojsonSourceLayerId).withProperties(
-                iconImage(symbolIconId),
-                iconOffset(new Float[]{0f, -8f})
-        ));
-
-    }
-
-    private void setUpDestination(Style style) {
-
-//        if (destination == null) {
-//            style.addSource(new GeoJsonSource(geoDestinationId));
-//        } else {
-            //        Add the marker sources to the map
-            style.addSource(new GeoJsonSource(geoDestinationId,
-                    FeatureCollection.fromFeatures(new Feature[]{
-                            Feature.fromGeometry(Point.fromLngLat(34.0, 0.3)),
-                    })));
-
-//            if (origin != null) {
-//                boundView();
-//            }
-//        }
-        // Add the red marker icon SymbolLayer to the map
-        style.addLayer(new SymbolLayer("layer-idDestination",
-                geoDestinationId).withProperties(
-                iconImage(symbolIconId),
-                iconOffset(new Float[]{0f, -8f})
-        ));
-
-    }
 
     /**
      * Make a request to the Mapbox Directions API. Once successful, pass the route to the
@@ -463,82 +480,6 @@ public class MapViewScreen extends AppCompatActivity {
                         }
                     });
                 }
-//                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
-//                bottomSheetDialog.setContentView(R.layout.home_sheet_dialog);
-//                bottomSheetDialog.setCanceledOnTouchOutside(true);
-
-//                TextView transportMode = bottomSheetDialog.findViewById(R.id.tvTransportMode);
-//                EditText sourceText = bottomSheetDialog.findViewById(R.id.etSourceContact);
-//                EditText destinationText = bottomSheetDialog.findViewById(R.id.etDestinationContact);
-//                Button buttonContinue = bottomSheetDialog.findViewById(R.id.continueBtn);
-
-//                transportMode.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        AlertDialog.Builder vehicleDialog = new AlertDialog.Builder(getContext());
-//                        vehicleDialog.setTitle("Modes of Transport");
-//                        vehicleDialog.setMessage("Select the size and type of vehicle that is appropriate for your load ?");
-////                        vehicleDialog.setView();
-//                        vehicleDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                Toast.makeText(getContext(), "Okay Pressed", Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//
-//                        vehicleDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                Toast.makeText(getContext(), "Cancel pressed", Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//                        vehicleDialog.show();
-//
-//                    }
-//                });
-
-//                transportMode.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        customDialog dialog = new customDialog(getContext());
-//                        dialog.show();
-//
-//                    }
-//                });
-
-//                buttonContinue.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        if (sourceText.getText().toString().trim() != null && destinationText.getText().toString().trim() != null) {
-//
-//                            homeViewModel.setDistance(currentRoute.distance());
-//                            homeViewModel.setSourceLocationLongitude(origin.longitude());
-//                            homeViewModel.setSourceLocationLatitude(origin.latitude());
-//                            homeViewModel.setDestinationLocationLongitude(destination.longitude());
-//                            homeViewModel.setDestinationLocationLatitude(destination.latitude());
-//                            homeViewModel.setTime(currentRoute.distance(), customAdapter.transportType);
-//                            homeViewModel.setMode(customAdapter.transportType);
-//                            homeViewModel.setSourceContact(sourceText.getText().toString().trim());
-//                            homeViewModel.setDestinationContact(destinationText.getText().toString().trim());
-//                            homeViewModel.setDestinationLocation(destinationLocation);
-//                            homeViewModel.setSourceLocation(sourceLocation);
-//
-//                            FragmentManager homeFragmentManager = getParentFragmentManager();
-//                            FragmentTransaction homeFragmentTransaction = homeFragmentManager.beginTransaction();
-//                            homeFragmentTransaction.replace(R.id.nav_host_fragment, DashboardFragment.class, null);
-//                            homeFragmentTransaction.setReorderingAllowed(true);
-//                            homeFragmentTransaction.addToBackStack("home");
-//                            homeFragmentTransaction.commit();
-//
-//                            bottomSheetDialog.cancel();
-//                        } else {
-//                            Toast.makeText(getContext(), "The Contact People are Missing", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                });
-
-//                bottomSheetDialog.show();
 
             }
 
