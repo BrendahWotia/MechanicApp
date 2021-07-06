@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
@@ -97,6 +98,18 @@ public class signUp extends AppCompatActivity {
                     }
                     else {
 
+                        SharedPreferences pref = getApplicationContext().getSharedPreferences("Preferences", 0);
+                        SharedPreferences.Editor editor = pref.edit();
+
+//                    Storing Preference Data
+                        editor.putString("eMail", email);
+                        editor.putString("passWord", password);
+                        editor.putString("userName", userName);
+                        editor.putString("phone", phone);
+//                        editor.editoputString("location", location);
+
+                        // commit changes
+                        editor.commit();
                         registerUser(email, password);
 
                     }
