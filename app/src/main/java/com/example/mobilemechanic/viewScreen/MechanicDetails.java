@@ -35,7 +35,7 @@ import com.squareup.picasso.Picasso;
 public class MechanicDetails extends AppCompatActivity {
     private static final int CALL_PERMISSION = 30;
     String mechName, mechLocation, mechMail, mechImage, mechPhone, mechSpeciality, mechLatitude, mechLongitude;
-    TextView tv_name, tv_location, tv_mail, tv_phone, tv_speciality, tv_latitude, tv_longitude;
+    TextView tv_name, tv_location, tv_mail, tv_phone, tv_speciality;
     ImageView mechanicImage;
     private Daraja daraja;
     String phoneNumber;
@@ -56,8 +56,8 @@ public class MechanicDetails extends AppCompatActivity {
         tv_mail = findViewById(R.id.tv_detailEmail);
         tv_phone = findViewById(R.id.tv_detailMechPhone);
         mechanicImage = findViewById(R.id.detailMechImage);
-        tv_latitude = findViewById(R.id.tv_latitude);
-        tv_longitude = findViewById(R.id.tv_longitude);
+//        tv_latitude = findViewById(R.id.tv_latitude);
+//        tv_longitude = findViewById(R.id.tv_longitude);
 
         receiveIntents();
 
@@ -102,13 +102,13 @@ public class MechanicDetails extends AppCompatActivity {
         tv_mail.setText(mechMail);
         tv_phone.setText(mechPhone);
         tv_speciality.setText(speciality);
-        tv_longitude.setText(mechLongitude);
-        tv_latitude.setText(mechLatitude);
+//        tv_longitude.setText(mechLongitude);
+//        tv_latitude.setText(mechLatitude);
 
         Picasso.get().load(mechImage).placeholder(R.drawable.ic_image_black_24dp)
                 .into(mechanicImage);
 
-        Toast.makeText(this, "Url : " + mechImage, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Url : " + mechImage, Toast.LENGTH_SHORT).show();
     }
 
     public void mailing(View view) {
@@ -146,9 +146,9 @@ public class MechanicDetails extends AppCompatActivity {
                 "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919",
                 TransactionType.CustomerPayBillOnline,
                 "1",
-                "0716229563",
+                phoneNumber,
                 "174379",
-                "0716229563",
+                phoneNumber,
                 "https://okellomarket.000webhostapp.com/api/mcash",
                 "Mechanic Payment",
                 "Services Payment"
@@ -158,8 +158,8 @@ public class MechanicDetails extends AppCompatActivity {
             @Override
             public void onResult(@NonNull LNMResult lnmResult) {
                 Log.i(MechanicDetails.this.getClass().getSimpleName(), lnmResult.ResponseDescription);
-                Toast.makeText(MechanicDetails.this, "Result:" + lnmResult.CheckoutRequestID
-                        + "  Code : " + lnmResult.ResponseDescription, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MechanicDetails.this, "Result:" + lnmResult.CheckoutRequestID
+//                        + "  Code : " + lnmResult.ResponseDescription, Toast.LENGTH_SHORT).show();
 
 //                paymentToFarmer();
             }

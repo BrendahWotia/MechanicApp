@@ -186,7 +186,7 @@ public class MapViewScreen extends AppCompatActivity {
 //                        circleP_bar.setVisibility(View.INVISIBLE);
                     }
 
-                    Toast.makeText(MapViewScreen.this, "value : " + mechanicList.size(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MapViewScreen.this, "value : " + mechanicList.size(), Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();
 //                    circleP_bar.setVisibility(View.INVISIBLE);
                 }
@@ -194,7 +194,7 @@ public class MapViewScreen extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    Toast.makeText(MapViewScreen.this, "Permission Denied...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapViewScreen.this, "Ooops Something went wrong Try Later...", Toast.LENGTH_SHORT).show();
                     Toast.makeText(MapViewScreen.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
 //                    circleP_bar.setVisibility(View.INVISIBLE);
                 }
@@ -203,7 +203,7 @@ public class MapViewScreen extends AppCompatActivity {
 //            circleP_bar.setVisibility(View.INVISIBLE);
 //            defaultView.setVisibility(View.VISIBLE);
 //            defaultView.setText(R.string.No_network);
-            Toast.makeText(this, "Okello Check out", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.No_network, Toast.LENGTH_LONG).show();
         }
         mapView = (MapView) findViewById(R.id.mapView);
 
@@ -218,7 +218,7 @@ public class MapViewScreen extends AppCompatActivity {
                     public void onStyleLoaded(@NonNull Style style) {
 
                         if (checkLocationPermission()) {
-                            Toast.makeText(MapViewScreen.this, "Permission are on...", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(MapViewScreen.this, "Permission are on...", Toast.LENGTH_SHORT).show();
                             enableLocationComponent(style);
                         } else {
                             Toast.makeText(MapViewScreen.this, "Requesting for permission", Toast.LENGTH_SHORT).show();
@@ -233,11 +233,11 @@ public class MapViewScreen extends AppCompatActivity {
                         style.addImage(symbolIconId, BitmapUtils.getBitmapFromDrawable(
                                 getResources().getDrawable(R.drawable.ic_baseline_construction_24)));
 
-                        ArrayList<MechanicModel> mechanicModels = new ArrayList<>();
-
-                        mechanicModels.add( new MechanicModel("okello", "0712", "lop", "ed", "re", "df", "34.5", "0.3"));
-                        mechanicModels.add( new MechanicModel("otieno", "0712", "lop", "ed", "re", "df", "37.5", "0.4"));
-                        mechanicModels.add( new MechanicModel("enos", "0712", "lop", "ed", "re", "df", "24.5", "0.2"));
+//                        ArrayList<MechanicModel> mechanicModels = new ArrayList<>();
+//
+//                        mechanicModels.add( new MechanicModel("okello", "0712", "lop", "ed", "re", "df", "34.5", "0.3"));
+//                        mechanicModels.add( new MechanicModel("otieno", "0712", "lop", "ed", "re", "df", "37.5", "0.4"));
+//                        mechanicModels.add( new MechanicModel("enos", "0712", "lop", "ed", "re", "df", "24.5", "0.2"));
 
                         // Create an empty GeoJSON source using the empty feature collection
 //                        setUpSource(style, mechanicList);
@@ -252,7 +252,7 @@ public class MapViewScreen extends AppCompatActivity {
                         symbolManager.addClickListener(new OnSymbolClickListener() {
                             @Override
                             public boolean onAnnotationClick(Symbol symbol) {
-                                Toast.makeText(MapViewScreen.this, "Section Clicked" + symbol.getLatLng(), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(MapViewScreen.this, "Section Clicked" + symbol.getLatLng(), Toast.LENGTH_SHORT).show();
 
                                MechanicModel currentMechanic = new MechanicModel();
 

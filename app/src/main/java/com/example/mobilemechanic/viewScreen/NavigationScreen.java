@@ -173,7 +173,7 @@ public class NavigationScreen extends AppCompatActivity {
                     public void onStyleLoaded(@NonNull Style style) {
 
                         if (checkLocationPermission()) {
-                            Toast.makeText(NavigationScreen.this, "Permission are on...", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(NavigationScreen.this, "Permission are on...", Toast.LENGTH_SHORT).show();
                             enableLocationComponent(style);
                         } else {
                             Toast.makeText(NavigationScreen.this, "Requesting for permission", Toast.LENGTH_SHORT).show();
