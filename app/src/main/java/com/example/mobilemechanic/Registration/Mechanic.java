@@ -110,7 +110,7 @@ public class Mechanic extends AppCompatActivity {
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Mechanic.this, "Location Clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Mechanic.this, "Location Clicked", Toast.LENGTH_SHORT).show();
 
                 initSearchPlaces();
             }
@@ -150,14 +150,14 @@ public class Mechanic extends AppCompatActivity {
     }
 
     private void addUserLocations() {
-        home = CarmenFeature.builder().text("Mapbox SF Office")
-                .geometry(Point.fromLngLat(-122.3964485, 37.7912561))
+        home = CarmenFeature.builder().text("Brendah's Home")
+                .geometry(Point.fromLngLat(34.5, 0.3))
                 .placeName("50 Beale St, San Francisco, CA")
                 .id("mapbox-sf")
                 .properties(new JsonObject())
                 .build();
 
-        work = CarmenFeature.builder().text("OKELLO DC Office")
+        work = CarmenFeature.builder().text("Brendah's DC Office")
                 .placeName("740 15th Street NW, Washington DC")
                 .geometry(Point.fromLngLat(-77.0338348, 38.899750))
                 .id("mapbox-dc")
@@ -166,9 +166,10 @@ public class Mechanic extends AppCompatActivity {
     }
     private void uploadDetails() {
         if (image_uri != null) {
+            mProgress.setVisibility(View.VISIBLE);
             okelloModel();
         } else {
-            Toast.makeText(this, "Empty Uri...Select an Image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Select an Image", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -180,7 +181,7 @@ public class Mechanic extends AppCompatActivity {
 
         UploadTask uploadTask = photoReference.putFile(image_uri);
 
-        Toast.makeText(this, "UP " + uploadTask, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "UP " + uploadTask, Toast.LENGTH_SHORT).show();
 
         // Register observers to listen for when the download is done or if it fails
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -188,14 +189,14 @@ public class Mechanic extends AppCompatActivity {
             public void onFailure(@NonNull Exception exception) {
 
                 // Handle unsuccessful uploads
-                Toast.makeText(Mechanic.this, "Fail...okello", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Mechanic.this, "Ooops Something went wrong Try Later", Toast.LENGTH_SHORT).show();
 
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
 
-                Toast.makeText(Mechanic.this, "Success...okello", Toast.LENGTH_LONG).show();
+//                Toast.makeText(Mechanic.this, "Ooops Something went wrong Try Later", Toast.LENGTH_LONG).show();
 
                 if (taskSnapshot.getMetadata() != null) {
                     if (taskSnapshot.getMetadata().getReference() != null) {
@@ -203,7 +204,7 @@ public class Mechanic extends AppCompatActivity {
                         result.addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Toast.makeText(Mechanic.this, "Proceed...", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(Mechanic.this, "Proceed...", Toast.LENGTH_LONG).show();
                                 String sImage = uri.toString();
 
                                 mProgress.setVisibility(View.VISIBLE);
@@ -221,7 +222,7 @@ public class Mechanic extends AppCompatActivity {
                                 mechanic.setId(key);
                                 databaseReference.child(key).setValue(mechanic);
 
-                                Toast.makeText(Mechanic.this, "Success Key retention...", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(Mechanic.this, "Success Key retention...", Toast.LENGTH_LONG).show();
                                 mProgress.setVisibility(View.INVISIBLE);
                                 backToProfile(nameMech, phoneMech,locationMech, emailMech, sImage, spec);
                                 name.setText("");
@@ -234,7 +235,7 @@ public class Mechanic extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 mProgress.setVisibility(View.INVISIBLE);
-                                Toast.makeText(Mechanic.this, "Database Fail...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Mechanic.this, "Ooops Something went wrong Try Later", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -269,22 +270,11 @@ public class Mechanic extends AppCompatActivity {
         backIntent.putExtra("image", imageMech);
         backIntent.putExtra("speciality", special);
 //        backIntent.putExtra("key", key);
-        Toast.makeText(this, "Successful Upload of Details..", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Successful Upload of Details..", Toast.LENGTH_SHORT).show();
 //
         startActivity(backIntent);
 //        Toast.makeText(this, "Upload Done Go to Profile", Toast.LENGTH_SHORT).show();
     }
-//    private void uploadDetails() {
-////        receiveEntries();
-//
-//
-////        DatabaseReference MechanicRef = FirebaseDatabase.getInstance().getReference("Mechanics");
-//        String key = mechanicReference.getKey();
-//        MechanicModel  specificMech = new MechanicModel(nameMech, phoneMech, locationMech, emailMech, "https:image");
-//        mechanicReference.child(key).setValue(specificMech);
-//
-//
-//    }
 
     private void receiveEntries() {
         nameMech = name.getText().toString().trim();

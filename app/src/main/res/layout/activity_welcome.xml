@@ -82,14 +82,15 @@
 
     <Button
         android:id="@+id/welcomeBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/round_btn"
-        android:padding="16dp"
-        android:text="CONTINUE"
+        android:padding="10dp"
+        android:text="Continue"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
