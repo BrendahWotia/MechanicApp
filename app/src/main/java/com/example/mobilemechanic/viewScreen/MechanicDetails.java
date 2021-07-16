@@ -39,6 +39,7 @@ public class MechanicDetails extends AppCompatActivity {
     ImageView mechanicImage;
     private Daraja daraja;
     String phoneNumber;
+    String phoneInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,7 @@ public class MechanicDetails extends AppCompatActivity {
             @Override
             public void onResult(@NonNull AccessToken accessToken) {
                 Log.i(MechanicDetails.this.getClass().getSimpleName(), accessToken.getAccess_token());
-                Toast.makeText(MechanicDetails.this, "AccessToken : " + accessToken.getAccess_token(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MechanicDetails.this, "AccessToken : " + accessToken.getAccess_token(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -140,15 +141,15 @@ public class MechanicDetails extends AppCompatActivity {
     }
 
 
-    private void initiateStkPush() {
+    private void initiateStkPush(String phone) {
         LNMExpress lnmExpress = new LNMExpress(
                 "174379",
                 "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919",
                 TransactionType.CustomerPayBillOnline,
                 "1",
-                phoneNumber,
+                phone,
                 "174379",
-                phoneNumber,
+                phone,
                 "https://okellomarket.000webhostapp.com/api/mcash",
                 "Mechanic Payment",
                 "Services Payment"
@@ -201,18 +202,25 @@ public class MechanicDetails extends AppCompatActivity {
         alert.setView(input);
         input.setText(phoneNumber);
 
+
         alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 //                value = input.getText().toString();
+                phoneInput = input.getText().toString().trim();
+                if (phoneInput.isEmpty() || phoneInput.equals(null)) {
+                    Toast.makeText(MechanicDetails.this, "Please enter your number...", Toast.LENGTH_SHORT).show();
+                } else {
+                    new AsyncTask<Void, Void, String>() {
 
-                new AsyncTask<Void, Void, String>(){
+                        @Override
+                        protected String doInBackground(Void... voids) {
 
-                    @Override
-                    protected String doInBackground(Void... voids) {
-                        initiateStkPush();
-                        return null;
-                    }
-                }.execute();
+                            initiateStkPush(phoneInput);
+//                        }
+                            return null;
+                        }
+                    }.execute();
+                }
             }
         });
 
@@ -245,7 +253,7 @@ public class MechanicDetails extends AppCompatActivity {
         switch (requestCode){
             case CALL_PERMISSION :
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED ){
-                    Toast.makeText(this, "Permission For Calling has been Accepted...", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "Permission For Calling has been Accepted...", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(this, "Permission For Calling has been Denied...", Toast.LENGTH_SHORT).show();

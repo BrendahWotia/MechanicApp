@@ -221,7 +221,7 @@ public class MapViewScreen extends AppCompatActivity {
 //                            Toast.makeText(MapViewScreen.this, "Permission are on...", Toast.LENGTH_SHORT).show();
                             enableLocationComponent(style);
                         } else {
-                            Toast.makeText(MapViewScreen.this, "Requesting for permission", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(MapViewScreen.this, "Requesting for permission", Toast.LENGTH_SHORT).show();
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                         LOCATION_PERMISSION);
@@ -629,7 +629,7 @@ public class MapViewScreen extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay! Do the
                     // location-related task you need to do.
-                    Toast.makeText(this, "Permission are granted", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "Permission are granted", Toast.LENGTH_SHORT).show();
 
                     homeMapBoxMap.getStyle(new Style.OnStyleLoaded() {
                         @Override

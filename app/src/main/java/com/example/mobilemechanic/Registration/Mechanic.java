@@ -215,7 +215,7 @@ public class Mechanic extends AppCompatActivity {
                                         mProgress.setProgress(0);
                                     }
                                 }, 500);
-                                Toast.makeText(Mechanic.this, "Upload Successful..." + sImage, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(Mechanic.this, "Upload Successful..." + sImage, Toast.LENGTH_SHORT).show();
 
                                 mechanic = new MechanicModel(nameMech, phoneMech,locationMech, emailMech, sImage, spec, mechLongitude, mechLatitude);
                                 String key = databaseReference.push().getKey();
