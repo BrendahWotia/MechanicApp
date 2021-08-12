@@ -10,6 +10,8 @@ public class MechanicModel {
     private String imageUrl;
     private String id;
     private String speciality;
+    private String longitude;
+    private String latitude;
 
     public String getSpeciality() {
         return speciality;
@@ -19,13 +21,16 @@ public class MechanicModel {
         this.speciality = speciality;
     }
 
-    public MechanicModel(String name, String phone, String location, String email, String imageUrl, String speciality) {
+    public MechanicModel(String name, String phone, String location, String email, String imageUrl, String speciality,
+                         String longitude, String latitude) {
         this.name = name;
         this.phone = phone;
         this.location = location;
         this.email = email;
         this.imageUrl = imageUrl;
         this.speciality = speciality;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public MechanicModel(String name, String phone, String location, String email, String imageUrl) {
@@ -52,6 +57,23 @@ public class MechanicModel {
     //    public MechanicModel(String nameMech, String phoneMech, String emailMech, String sImage) {
 //
 //    }
+
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
 
     public String getName() {
         return name;

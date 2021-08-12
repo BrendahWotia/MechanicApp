@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +35,19 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.JsonObject;
+import com.mapbox.api.geocoding.v5.models.CarmenFeature;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.geojson.Point;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
+import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.squareup.picasso.Picasso;
 
 public class Mechanic extends AppCompatActivity {
@@ -41,6 +56,8 @@ public class Mechanic extends AppCompatActivity {
     Button uploadButton ;
     ImageView mechImage;
     String nameMech, phoneMech, locationMech, emailMech, spec;
+    String mechLatitude;
+    String mechLongitude;
     FirebaseDatabase database ;
     DatabaseReference mechanicReference ;
     MechanicModel mechanic ;
@@ -50,10 +67,14 @@ public class Mechanic extends AppCompatActivity {
     public static final int IMAGE_REQUEST = 1;
     private static final int PERMISSION_CODE = 1000;
     private AutoCompleteTextView autoCompleteTextView;
+    private CarmenFeature home;
+    private CarmenFeature work;
+    private static final int REQUEST_CODE_AUTOCOMPLETE = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Mapbox.getInstance(this,getString(R.string.public_token));
         setContentView(R.layout.activity_mechanic);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -85,6 +106,15 @@ public class Mechanic extends AppCompatActivity {
 
         mechanic = new MechanicModel();
 
+        addUserLocations();
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(Mechanic.this, "Location Clicked", Toast.LENGTH_SHORT).show();
+
+                initSearchPlaces();
+            }
+        });
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,11 +133,43 @@ public class Mechanic extends AppCompatActivity {
 //        });
     }
 
+    private void initSearchPlaces() {
+
+        Intent intent = new PlaceAutocomplete.IntentBuilder()
+                .accessToken(Mapbox.getAccessToken() != null ? Mapbox.getAccessToken() : getString(R.string.public_token))
+                .placeOptions(PlaceOptions.builder()
+                        .backgroundColor(Color.parseColor("#EEEEEE"))
+                        .limit(10)
+                        .addInjectedFeature(home)
+                        .addInjectedFeature(work)
+                        .build(PlaceOptions.MODE_CARDS))
+                .build(Mechanic.this);
+
+        startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
+
+    }
+
+    private void addUserLocations() {
+        home = CarmenFeature.builder().text("Brendah's Home")
+                .geometry(Point.fromLngLat(34.5, 0.3))
+                .placeName("50 Beale St, San Francisco, CA")
+                .id("mapbox-sf")
+                .properties(new JsonObject())
+                .build();
+
+        work = CarmenFeature.builder().text("Brendah's DC Office")
+                .placeName("740 15th Street NW, Washington DC")
+                .geometry(Point.fromLngLat(-77.0338348, 38.899750))
+                .id("mapbox-dc")
+                .properties(new JsonObject())
+                .build();
+    }
     private void uploadDetails() {
         if (image_uri != null) {
+            mProgress.setVisibility(View.VISIBLE);
             okelloModel();
         } else {
-            Toast.makeText(this, "Empty Uri...Select an Image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Select an Image", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -119,7 +181,7 @@ public class Mechanic extends AppCompatActivity {
 
         UploadTask uploadTask = photoReference.putFile(image_uri);
 
-        Toast.makeText(this, "UP " + uploadTask, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "UP " + uploadTask, Toast.LENGTH_SHORT).show();
 
         // Register observers to listen for when the download is done or if it fails
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -127,14 +189,14 @@ public class Mechanic extends AppCompatActivity {
             public void onFailure(@NonNull Exception exception) {
 
                 // Handle unsuccessful uploads
-                Toast.makeText(Mechanic.this, "Fail...okello", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Mechanic.this, "Ooops Something went wrong Try Later", Toast.LENGTH_SHORT).show();
 
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
 
-                Toast.makeText(Mechanic.this, "Success...okello", Toast.LENGTH_LONG).show();
+//                Toast.makeText(Mechanic.this, "Ooops Something went wrong Try Later", Toast.LENGTH_LONG).show();
 
                 if (taskSnapshot.getMetadata() != null) {
                     if (taskSnapshot.getMetadata().getReference() != null) {
@@ -142,7 +204,7 @@ public class Mechanic extends AppCompatActivity {
                         result.addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Toast.makeText(Mechanic.this, "Proceed...", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(Mechanic.this, "Proceed...", Toast.LENGTH_LONG).show();
                                 String sImage = uri.toString();
 
                                 mProgress.setVisibility(View.VISIBLE);
@@ -153,14 +215,14 @@ public class Mechanic extends AppCompatActivity {
                                         mProgress.setProgress(0);
                                     }
                                 }, 500);
-                                Toast.makeText(Mechanic.this, "Upload Successful..." + sImage, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(Mechanic.this, "Upload Successful..." + sImage, Toast.LENGTH_SHORT).show();
 
-                                mechanic = new MechanicModel(nameMech, phoneMech,locationMech, emailMech, sImage, spec);
+                                mechanic = new MechanicModel(nameMech, phoneMech,locationMech, emailMech, sImage, spec, mechLongitude, mechLatitude);
                                 String key = databaseReference.push().getKey();
                                 mechanic.setId(key);
                                 databaseReference.child(key).setValue(mechanic);
 
-                                Toast.makeText(Mechanic.this, "Success Key retention...", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(Mechanic.this, "Success Key retention...", Toast.LENGTH_LONG).show();
                                 mProgress.setVisibility(View.INVISIBLE);
                                 backToProfile(nameMech, phoneMech,locationMech, emailMech, sImage, spec);
                                 name.setText("");
@@ -173,7 +235,7 @@ public class Mechanic extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 mProgress.setVisibility(View.INVISIBLE);
-                                Toast.makeText(Mechanic.this, "Database Fail...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Mechanic.this, "Ooops Something went wrong Try Later", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -208,22 +270,11 @@ public class Mechanic extends AppCompatActivity {
         backIntent.putExtra("image", imageMech);
         backIntent.putExtra("speciality", special);
 //        backIntent.putExtra("key", key);
-        Toast.makeText(this, "Successful Upload of Details..", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Successful Upload of Details..", Toast.LENGTH_SHORT).show();
 //
         startActivity(backIntent);
 //        Toast.makeText(this, "Upload Done Go to Profile", Toast.LENGTH_SHORT).show();
     }
-//    private void uploadDetails() {
-////        receiveEntries();
-//
-//
-////        DatabaseReference MechanicRef = FirebaseDatabase.getInstance().getReference("Mechanics");
-//        String key = mechanicReference.getKey();
-//        MechanicModel  specificMech = new MechanicModel(nameMech, phoneMech, locationMech, emailMech, "https:image");
-//        mechanicReference.child(key).setValue(specificMech);
-//
-//
-//    }
 
     private void receiveEntries() {
         nameMech = name.getText().toString().trim();
@@ -287,7 +338,28 @@ public class Mechanic extends AppCompatActivity {
 
             }
         }
-    }
+
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_AUTOCOMPLETE) {
+
+            // Retrieve selected location's CarmenFeature
+//           if (data != null){
+               CarmenFeature selectedCarmenFeature = PlaceAutocomplete.getPlace(data);
+//            Log.d(" Origin : ", "onActivityResult: " + selectedCarmenFeature.placeName());
+               locationMech = selectedCarmenFeature.placeName();
+               location.setText(locationMech);
+               mechLongitude = Double.toString(((Point) selectedCarmenFeature.geometry()).longitude());
+               mechLatitude = Double.toString(((Point) selectedCarmenFeature.geometry()).latitude());
+//            homeBinding.sourceText.setText(sourceLocation);
+
+//           }
+//            origin = Point.fromLngLat(((Point) selectedCarmenFeature.geometry()).longitude(), ((Point) selectedCarmenFeature.geometry()).latitude());
+            // Create a new FeatureCollection and add a new Feature to it using selectedCarmenFeature above.
+            // Then retrieve and update the source designated for showing a selected location's symbol layer icon
+
+
+
+        }
+                }
 
     public void selectPhoto(View view) {
         choosingPhoto();

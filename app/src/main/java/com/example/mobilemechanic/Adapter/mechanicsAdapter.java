@@ -68,6 +68,8 @@ public class mechanicsAdapter extends RecyclerView.Adapter<mechanicsAdapter.mech
                     passIntent.putExtra("image", currentMechanic.getImageUrl());
                     passIntent.putExtra("phone", currentMechanic.getPhone());
                     passIntent.putExtra("speciality", currentMechanic.getSpeciality());
+                    passIntent.putExtra("latitude", currentMechanic.getLatitude());
+                    passIntent.putExtra("longitude", currentMechanic.getLongitude());
 
                     mcontext.startActivity(passIntent);
                     Log.d(TAG, "onClick: detail view...");

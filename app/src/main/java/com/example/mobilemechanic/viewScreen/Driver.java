@@ -55,7 +55,7 @@ public class Driver extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        setTitle("Mechanic List");
+        setTitle("Mechanic List ");
 
         defaultView = findViewById(R.id.defaultView);
 
@@ -141,6 +141,7 @@ public class Driver extends AppCompatActivity {
                         circleP_bar.setVisibility(View.INVISIBLE);
                     }
 
+//                    Toast.makeText(Driver.this, "Value : " + mechanicList.size(), Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();
                     circleP_bar.setVisibility(View.INVISIBLE);
                 }
@@ -157,7 +158,7 @@ public class Driver extends AppCompatActivity {
             circleP_bar.setVisibility(View.INVISIBLE);
             defaultView.setVisibility(View.VISIBLE);
             defaultView.setText(R.string.No_network);
-            Toast.makeText(this, "Okello Check out", Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "Okello Check out", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -186,7 +187,7 @@ public class Driver extends AppCompatActivity {
                     MechanicModel modelFiltered = snapshot.getValue(MechanicModel.class);
 
                     if (pName.equals(null)) {
-                        Toast.makeText(Driver.this, "Name is null", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Driver.this, "Name is not Availed", Toast.LENGTH_SHORT).show();
                     } else {
                         if (pName.toLowerCase().contains(queryString.toLowerCase())) {
 //                            nameList.add(pName);
@@ -194,14 +195,14 @@ public class Driver extends AppCompatActivity {
                         }
 
                         if (pSpeciality.equals(null)) {
-                            Toast.makeText(Driver.this, "Specialization is Null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Driver.this, "Specialization is not Availed", Toast.LENGTH_SHORT).show();
                         } else {
                             if (pSpeciality.toLowerCase().contains(queryString.toLowerCase())) {
                                 filteredProductsList.add(modelFiltered);
                             }
 
                             if (pLocation.equals(null)) {
-                                Toast.makeText(Driver.this, "Location is null", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Driver.this, "Location is not Availed", Toast.LENGTH_SHORT).show();
                             } else {
                                 if (pLocation.toLowerCase().contains(queryString.toLowerCase())) {
                                     filteredProductsList.add(modelFiltered);
@@ -241,6 +242,14 @@ public class Driver extends AppCompatActivity {
 //                Toast.makeText(this, "Log Out Implementation Coming Soon", Toast.LENGTH_SHORT).show();
 
                 return true;
+
+            case R.id.mapSelection:
+
+                Intent mapIntent = new Intent(this, MapViewScreen.class);
+                startActivity(mapIntent);
+
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Mobile Mechanic</string>
     <string name="No_network">Connection Lost...</string>
+    <string name="tvWelcome">Welcome to E - Mechanic Platform</string>
+    <string name="tvWelcomeNote">Who is the Platform meant for :</string>
+    <string name="tvDriver">1. Driver who is stuck at home or on the road due to Vehicle breakdown.</string>
+    <string name="tvMechanic">2. A Skilled Mechanic who wants to be flexible and easy reachable to offer Mechanical Services.</string>
+    <string name="public_token">pk.eyJ1IjoiY29kZS1nZW5lcmFsIiwiYSI6ImNra2NtcjBwcTBsaXMyb29hMGw4ZzFnZXIifQ.MmdOkaY4tpy2MauYCPB-Mg</string>
 </resources>

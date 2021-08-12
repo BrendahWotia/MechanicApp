@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -14,31 +14,46 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".viewScreen.MechanicDetails"
-            android:parentActivityName=".viewScreen.Driver"></activity>
-        <activity android:name=".Registration.signIn"
-            android:label="Verification"
-            android:parentActivityName=".bridge.FirstScreen"/>
-        <activity android:name=".Registration.signUp"
-            android:label="Registration"
-            android:parentActivityName=".bridge.FirstScreen">
-
-        </activity>
-        <activity android:name=".bridge.FirstScreen"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".viewScreen.Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".viewScreen.Profile"
-            android:parentActivityName=".Registration.Mechanic"/>
-        <activity android:name=".viewScreen.Driver"
-            android:parentActivityName=".bridge.MainActivity"/>
-        <activity android:name=".Registration.Mechanic"
-            android:parentActivityName=".bridge.MainActivity"/>
-        <activity android:name=".bridge.MainActivity"
+        <activity android:name=".viewScreen.NavigationScreen" />
+        <activity android:name=".viewScreen.MapViewScreen" />
+        <activity
+            android:name=".viewScreen.MechanicDetails"
+            android:parentActivityName=".viewScreen.Driver" />
+        <activity
+            android:name=".Registration.signIn"
+            android:label="Verification"
+            android:parentActivityName=".bridge.FirstScreen" />
+        <activity
+            android:name=".Registration.signUp"
+            android:label="Registration"
+            android:parentActivityName=".bridge.FirstScreen" />
+        <activity
+            android:name=".bridge.FirstScreen"
+            android:theme="@style/AppTheme.NoActionBar">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!---->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".viewScreen.Profile"
+            android:parentActivityName=".Registration.Mechanic" />
+        <activity
+            android:name=".viewScreen.Driver"
+            android:parentActivityName=".bridge.MainActivity" />
+        <activity
+            android:name=".Registration.Mechanic"
+            android:parentActivityName=".bridge.MainActivity" />
+        <activity
+            android:name=".bridge.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <!-- <intent-filter> -->

@@ -28,7 +28,7 @@ public class Profile extends AppCompatActivity {
 
         switch (item.getItemId()) {
 
-            case R.id.logOut:
+            case R.id.logOutMech:
 //                logging out implementation
 //                Toast.makeText(this, "Log Out Implementation Coming Soon", Toast.LENGTH_SHORT).show();
 //                mechAuth.signOut();
@@ -43,7 +43,7 @@ public class Profile extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 //        super.onCreateOptionsMenu(menu);
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.options_menu, menu);
+        menuInflater.inflate(R.menu.mech_menu, menu);
 
 
         return true;
@@ -83,14 +83,14 @@ public class Profile extends AppCompatActivity {
 
 
 
-            tvName.setText("Name :            " + pName);
-            tvMail.setText("E-Mail Address :         " + pMail);
-            tvPhone.setText("Phone Number :         " + pPhone);
-            tvLocation.setText("Location :          " + pLocation);
-            tvSpeciality.setText("Specialization :      " + pSpeciality);
+            tvName.setText(pName);
+            tvMail.setText(pMail);
+            tvPhone.setText(pPhone);
+            tvLocation.setText(pLocation);
+            tvSpeciality.setText(pSpeciality);
 
             Picasso.get().load(pImage).placeholder(R.drawable.ic_image_black_24dp).into(profileImage);
-            Toast.makeText(this, "Saving Profile SuccessFull...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Saving Profile SuccessFul...", Toast.LENGTH_SHORT).show();
 
         }
     }
